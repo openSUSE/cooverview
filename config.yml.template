@@ -1,0 +1,5 @@
+proto: https
+host: test-registry
+port: 443
+user: myuser
+pass: mypass

@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Net::Server::HTTP;
+use FindBin;
+
+Net::Server::HTTP->run(port => 8080, app => {'/' => "$FindBin::Bin/cooverview"});
+
+exit 0;
