@@ -1,0 +1,49 @@
+[% IF error %]
+    <div class='alert alert-danger'>[% error %]</div>
+[% END %]
+[% FOR tag IN tags %]
+    <div class='alert alert-secondary'>[% tag.pull_command %]</div>
+    <div class=details-box>
+      <div class=row>
+        <div class=col-md-1>
+        Name:
+        </div>
+        <div class=col-md-11>
+	[% tag.manifest.name %]
+      </div>
+     </div>
+     <div class=row>
+      <div class=col-md-1>
+        Tag:
+      </div>
+      <div class=col-md-11>
+	[% tag.manifest.tag %]
+      </div>
+     </div>
+     <div class=row>
+      <div class=col-md-1>
+        Arch:
+      </div>
+      <div class=col-md-11>
+	[% tag.manifest.architecture %]
+      </div>
+     </div>
+     <div class=row>
+      <div class=col-md-1>
+	Layers:
+      </div>
+      <div class=col-md-11>
+      </div>
+     </div>
+
+     [% FOR layer IN tag.manifest.fsLayers %]
+       <div class=row>
+	 <div class=col-md-1>
+	 </div>
+	 <div class=col-md-11>
+	   [% layer.blobSum %]
+	 </div>
+       </div>
+     [% END%]
+    </div>
+[% END %]

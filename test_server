@@ -2,9 +2,28 @@
 
 use strict;
 use warnings;
-use Net::Server::HTTP;
 use FindBin;
 
-Net::Server::HTTP->run(port => 8080, app => {'/' => "$FindBin::Bin/cooverview"});
+$ENV{TEST_SERVER} = 1;
 
-exit 0;
+use base qw(Net::Server::HTTP);
+
+__PACKAGE__->run(port=>8080);
+ 
+sub process_http_request {
+  my $self = shift;
+
+  $ENV{'REQUEST_URI'} =~ /^\/cooverview\/(.+\.(js|css))$/;
+  return $self->exec_trusted_perl("./cooverview") unless $2;
+  my %ct = (js => "application/javascript", css => "text/css");
+  print "Content-type: $ct{$2}\r\n\r\n";
+  print spew("$FindBin::Bin/$1");
+}
+
+sub spew {
+  my ($f) = @_;
+  open(F, '<', $f) || die "Could not open '$f': $!";
+  my @lines = <F>;
+  close F;
+  return @lines;
+}

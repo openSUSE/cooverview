@@ -1,0 +1,12 @@
+    <div class=jumbotron>
+      <h1>SUSE Container Registry/Notary</h1>
+      <h2>Container Images built by OBS</h2>
+      <p>You can click on the blue boxes to get detailed information about the
+         container image including the known tags and included layers. In the
+         grey boxes you will find a complete command line to pull the images into
+         your local docker environment.
+      </p>
+      <p>
+        For comments or bugreports, feel free to open an issue on <a href="https://github.com/M0ses/cooverview/issues">GitHub</a>
+      </p>
+    </div>

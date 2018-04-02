@@ -14,8 +14,9 @@
 
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
-
-%define cgi_dir /srv/www/cgi-bin
+%define www_dir /srv/www
+%define cgi_dir %{www_dir}/cgi-bin
+%define htdocs_dir %{www_dir}/htdocs
 
 Name:           cooverview
 Version:        0.0.0
@@ -55,7 +56,18 @@ make config
 %{cgi_dir}/*
 %dir /etc/cooverview/
 %config (noreplace) /etc/cooverview/config.yml
+/etc/cooverview/templates
+%dir %{www_dir}
+%dir %{htdocs_dir}
+%dir %{htdocs_dir}/cooverview
+%dir %{htdocs_dir}/cooverview/js
+%dir %{htdocs_dir}/cooverview/css
+%{htdocs_dir}/cooverview/css/bootstrap.min.css
+%{htdocs_dir}/cooverview/css/my.css
+%{htdocs_dir}/cooverview/js/bootstrap.bundle.min.js
+%{htdocs_dir}/cooverview/js/bootstrap.min.js
+%{htdocs_dir}/cooverview/js/jquery.min.js
+%{htdocs_dir}/cooverview/js/my.js
 
 
 %changelog
-
