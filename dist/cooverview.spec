@@ -48,6 +48,8 @@ export DESTDIR=%{buildroot}
 export CGI_DIR=%{cgi_dir}
 %make_install
 make config
+mkdir -p %{buildroot}%{_defaultdocdir}/%{name}/contrib
+cp contrib/index.html %{buildroot}%{_defaultdocdir}/%{name}/contrib
 
 %files
 %defattr(-,root,root)
@@ -68,6 +70,6 @@ make config
 %{htdocs_dir}/cooverview/js/bootstrap.min.js
 %{htdocs_dir}/cooverview/js/jquery.min.js
 %{htdocs_dir}/cooverview/js/my.js
-
+%{_defaultdocdir}/%{name}/contrib/
 
 %changelog
