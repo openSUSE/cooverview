@@ -29,7 +29,7 @@ Source:         %{name}-%{version}.tar.xz
 #BuildRequires:  
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Requires:       perl(YAML)
-Requires:       perl(JSON::XS)
+Requires:       perl(JSON::MaybeXS)
 Requires:       perl(Net::Docker::Registry::Client)
 Requires:       perl(Template)
 BuildArch:      noarch

@@ -6,3 +6,9 @@
 .details-box {
   margin-bottom: 30px;
 }
+
+.alert-suse {
+  background: #173f4f;
+  color: #35b9ab;
+  border-color: #6da741;
+}

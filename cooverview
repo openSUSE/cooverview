@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use YAML;
 use Data::Dumper;
-use JSON::XS;
+use JSON::MaybeXS;
 use Net::Docker::Registry::Client;
 use Template;
 my $cfg_file = "/etc/cooverview/config.yml";
@@ -64,27 +64,37 @@ sub create_details_html {
   my $content;
   my $error;
   my $tags = [];
+  my $info;
 
   my $pull_prefix="docker pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
 
   eval {
-    for my $tag (@{$drc->list_tags($rep)}) {
+    my $all_tags = $drc->list_tags($rep);
+    die "No tags defined for this image\n" unless $all_tags;
+    for my $tag (@{$all_tags}) {
       my $manifest = $drc->manifests($rep, $tag);
       my $data = {
         pull_command => "$pull_prefix$rep:$tag",
-        manifest     => $manifest
+        manifest     => $manifest,
+        name         => $rep,
       };
       push @$tags, $data;
     }
+
+    $info = $drc->obs_info_json($rep) if $config->{use_obs_extended_info};
   };
 
   $error = $@ if $@;
+
+  print STDERR Dumper($info);
 
   $template->process(
     'details.tt2',
     {
       error  => $error,
       tags   => $tags,
+      info   => $info,
+      use_obs_extended_info => $config->{use_obs_extended_info},
     }
   ) || die $template->error();
 }
