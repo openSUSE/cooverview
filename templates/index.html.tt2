@@ -12,7 +12,7 @@
         <div class="alert alert-danger">[% error %]</div>
       [% END %]
       [% FOR rep IN repositories %]
-      <div class='alert alert-suse container-hl' id='hl-[% rep %]'>Found image <strong>[% rep %]</strong></div>
+      <div class='alert alert-suse container-hl' id='hl-[% rep %]'><strong>[% rep %]</strong></div>
       <div id='details-[% rep %]'></div>
       [% END %]
     </div>

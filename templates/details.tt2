@@ -1,15 +1,14 @@
 [% IF error %]
     <div class='alert alert-danger'>[% error %]</div>
-[% END %]
-[% FOR tag IN tags %]
-    <div class='alert alert-secondary'>[% tag.pull_command %]</div>
+[% ELSE %]
+[% USE date %]
     <div class=details-box>
       <div class=row>
         <div class="col-md-1">
          <b>Name:</b>
         </div>
         <div class=col-md-11>
-	[% tag.manifest.name || tag.name %]
+	[% name %]
       </div>
      </div>
      [% IF use_obs_extended_info %]
@@ -18,7 +17,7 @@
            <b>Project:</b>
          </div>
          <div class=col-md-11>
-           [% info.project %]
+           [% project %]
          </div>
        </div>
 
@@ -27,10 +26,15 @@
            <b>Repository:</b>
          </div>
          <div class=col-md-11>
-           [% info.repository %]
+           [% repository %]
          </div>
        </div>
-       [% FOREACH tag IN info.tags.keys %]
+     [% END %]
+[% FOR tag_hash IN tags %]
+[% tag = tag_hash.tag %]
+    <div class='alert alert-secondary'>[% tag_hash.pull_command %]</div>
+    <div class=details-box>
+     [% IF use_obs_extended_info %]
        <div class=row>
          <div class=col-md-1>
 		 <b>Tag:</b>
@@ -39,151 +43,128 @@
            [% tag %]
          </div>
        </div>
+       [% FOREACH img IN info.tags.$tag.images %]
        <div class=row>
          <div class=col-md-1>
          </div>
-         <div class=col-md-2>
-           distmanifest
-         </div>
-         <div class=col-md-9>
-           [% info.tags.$tag.distmanifest %]
-         </div>
-       </div>
-       <div class=row>
-         <div class=col-md-1>
-         </div>
-         <div class=col-md-2>
-           distmanifesttype
-         </div>
-         <div class=col-md-9>
-           [% info.tags.$tag.distmanifesttype %]
-         </div>
-       </div>
-         [% FOREACH img IN info.tags.$tag.images %]
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             Arch:
-           </div>
-           <div class=col-md-9>
-             [% img.arch %]
-           </div>
-         </div>
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             BuildTime:
-           </div>
-           <div class=col-md-9>
-             [% img.buildtime %]
-           </div>
-         </div>
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             DistUrl:
-           </div>
-           <div class=col-md-9>
-             [% img.disturl %]
-           </div>
-         </div>
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             Go OS:
-           </div>
-           <div class=col-md-9>
-             [% img.goos %]
-           </div>
-         </div>
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             Go Arch:
-           </div>
-           <div class=col-md-9>
-             [% img.goarch %]
-           </div>
-         </div>
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             Image ID:
-	     <hr/>
-           </div>
-           <div class=col-md-9>
-             [% img.imageid %]
-	     <hr/>
-           </div>
-         </div>
-
-
-         <div class=row>
-           <div class=col-md-1>
-           </div>
-           <div class=col-md-2>
-             <b>Layers:</b>
-           </div>
-           <div class=col-md-9>
-           </div>
-         </div>
-           [% FOREACH layer IN img.layers %]
-           <div class=row>
-             <div class=col-md-3>
+         <div class=col-md-11>
+           <div class="card" style="margin-bottom:25px;">
+             <div class="card-header">
+               <div class=row>
+                 <div class=col-md-2>
+                   Image ID:
+                 </div>
+                 <div class=col-md-9>
+                   [% img.id %]
+                 </div>
+               </div>
              </div>
-             <div class=col-md-2>
-               Blob ID:
-             </div>
-             <div class=col-md-7>
-	       [% layer.blobid %]
-             </div>
-           </div>
 
-           <div class=row>
-             <div class=col-md-3>
-             </div>
-             <div class=col-md-2>
-               Blob Size:
-             </div>
-             <div class=col-md-7>
-	       [% layer.blobsize %]
-             </div>
-           </div>
+             <div class="card-body">
+	       <div class=row>
+		 <div class=col-md-2>
+		   OBS Arch:
+		 </div>
+		 <div class=col-md-9>
+		   [% img.arch %]
+		 </div>
+	       </div>
 
-           <div class=row>
-             <div class=col-md-3>
-             </div>
-             <div class=col-md-2>
-               Diff ID:
-	       <hr/>
-             </div>
-             <div class=col-md-7>
-	       [% layer.diffid %]
-	       <hr/>
-             </div>
-           </div>
-           [% END %]
+	       <div class=row>
+		 <div class=col-md-2>
+		   BuildTime:
+		 </div>
+		 <div class=col-md-9>
+                   [% IF img.buildtime %]
+		   [% date.format(img.buildtime, '%d-%b-%Y %H:%M:%S') %]
+		   ([% img.buildtime %])
+                   [% END %]
+		 </div>
+	       </div>
+
+	       <div class=row>
+		 <div class=col-md-2>
+		   DistUrl:
+		 </div>
+		 <div class=col-md-9>
+		   [% img.disturl %]
+		 </div>
+	       </div>
+
+	       <div class=row>
+		 <div class=col-md-2>
+		   Go OS:
+		 </div>
+		 <div class=col-md-9>
+		   [% img.goos %]
+		 </div>
+	       </div>
+
+	       <div class=row>
+		 <div class=col-md-2>
+		   Go Arch:
+		 </div>
+		 <div class=col-md-9>
+		   [% img.goarch %]
+		 </div>
+               </div>
+
+	       <div class=row>
+		 <div class=col-md-1>
+                   <button class="btn btn-primary layers-button" onclick="toogle_layer('[% img.id %]');">Layers</button>
+		 </div>
+		 <div class=col-md-11>
+                   <div class=card id="layers-[% img.id %]" style="display:none">
+                     <div class=card-header>
+                       <strong>Layers</strong>
+                     </div>
+                     <div class=card-body>
+		       [% FOREACH layer IN img.layers %]
+		       <div class=row>
+			 <div class=col-md-2>
+			   Blob ID:
+			 </div>
+			 <div class=col-md-10>
+			   [% layer.blobid %]
+			 </div>
+		       </div>
+
+		       <div class=row>
+			 <div class=col-md-2>
+			   Blob Size:
+			 </div>
+			 <div class=col-md-10>
+			   [% layer.blobsize %]
+			 </div>
+		       </div>
+
+		       <div class=row>
+			 <div class=col-md-2>
+			   Diff ID:
+			 </div>
+			 <div class=col-md-10>
+			   [% layer.diffid %]
+			 </div>
+		       </div>
+                       <hr>
+		       [% END %]
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div> <!-- / card-body -->
+           </div> <!-- / card -->
+         </div> <!-- / 2nd field in row -->
+       </div> <!-- / image row -->
+
          [% END %]
-       [%END %]
      [% ELSE %]
      <div class=row>
       <div class=col-md-1>
         Tag:
       </div>
       <div class=col-md-11>
-	[% tag.manifest.tag %]
+	[% tag_hash.manifest.tag %]
       </div>
      </div>
      <div class=row>
@@ -191,7 +172,7 @@
         Arch:
       </div>
       <div class=col-md-11>
-	[% tag.manifest.architecture %]
+	[% tag_hash.manifest.architecture %]
       </div>
      </div>
      <div class=row>
@@ -202,7 +183,7 @@
       </div>
      </div>
 
-     [% FOR layer IN tag.manifest.fsLayers %]
+     [% FOR layer IN tag_hash.manifest.fsLayers %]
        <div class=row>
 	 <div class=col-md-1>
 	 </div>
@@ -215,3 +196,4 @@
      [% END %]
     </div>
 [% END %]
+[% END %] <!-- IF error -->

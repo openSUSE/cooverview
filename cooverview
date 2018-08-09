@@ -68,33 +68,46 @@ sub create_details_html {
 
   my $pull_prefix="docker pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
 
+  my $data = {
+    name => $rep,
+    tags => [],
+    use_obs_extended_info => $config->{use_obs_extended_info},
+  };
+
   eval {
     my $all_tags = $drc->list_tags($rep);
     die "No tags defined for this image\n" unless $all_tags;
     for my $tag (@{$all_tags}) {
       my $manifest = $drc->manifests($rep, $tag);
-      my $data = {
+      my $tag_data = {
         pull_command => "$pull_prefix$rep:$tag",
         manifest     => $manifest,
         name         => $rep,
+	tag          => $tag,
       };
-      push @$tags, $data;
+      push @{$data->{tags}}, $tag_data;
     }
-
-    $info = $drc->obs_info_json($rep) if $config->{use_obs_extended_info};
+    if ($config->{use_obs_extended_info}) {
+      $data->{info} = $drc->obs_info_json($rep);
+      $data->{project} = $data->{info}->{project};
+      $data->{repository} = $data->{info}->{repository};
+      foreach my $tag_val (values %{$data->{info}->{tags}}) {
+         foreach my $img (@{$tag_val->{images}}) {
+           $img->{id} = $img->{imageid};
+	   $img->{id} =~ s/.*://;
+	   $img->{id} = substr $img->{id}, 0, 12;
+	 }
+      }
+    }
   };
+  $data->{error} = $@ if $@;
+  # logit($data);
+  $template->process('details.tt2', $data) || die $template->error();
+}
 
-  $error = $@ if $@;
-
-  print STDERR Dumper($info);
-
-  $template->process(
-    'details.tt2',
-    {
-      error  => $error,
-      tags   => $tags,
-      info   => $info,
-      use_obs_extended_info => $config->{use_obs_extended_info},
-    }
-  ) || die $template->error();
+sub logit {
+  my ($msg) = @_;
+  open(my $fh, '>>', '/tmp/cooverview.log') || die "Could not open /tmp/cooverview.log: $!";
+  print $fh (ref $msg) ? Dumper($msg) : $msg;
+  close $fh;
 }
