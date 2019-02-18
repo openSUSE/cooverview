@@ -1,5 +1,11 @@
+templates_dir: /etc/cooverview/templates
 proto: https
 host: test-registry
 port: 443
 user: myuser
 pass: mypass
+pull_host: registry.opensuse.org
+use_obs_extended_info: 1
+build_host:
+  host: build.opensuse.org
+  # proto: https
