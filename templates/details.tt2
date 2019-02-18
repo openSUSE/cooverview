@@ -17,7 +17,11 @@
            <b>Project:</b>
          </div>
          <div class=col-md-11>
+           [% IF project_href %]
+           <a href="[% project_href %]" target="_blank">[% project %]</a>
+           [% ELSE %]
            [% project %]
+           [% END %]
          </div>
        </div>
 

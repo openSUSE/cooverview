@@ -23,7 +23,11 @@ css:
 
 config:
 	[ -d $(DESTDIR)/etc/cooverview ] || mkdir -p $(DESTDIR)/etc/cooverview
-	install -m 644 ./config.yml.template $(DESTDIR)/etc/cooverview/config.yml
+	@if [ -f ./config.yml ];then \
+		install -m 644 ./config.yml $(DESTDIR)/etc/cooverview/config.yml;\
+	else \
+		install -m 644 ./config.yml.template $(DESTDIR)/etc/cooverview/config.yml;\
+	fi
 
 templates:
 	[ -d $(DESTDIR)/etc/cooverview/templates ] || \

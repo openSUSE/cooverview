@@ -90,6 +90,9 @@ sub create_details_html {
     if ($config->{use_obs_extended_info}) {
       $data->{info} = $drc->obs_info_json($rep);
       $data->{project} = $data->{info}->{project};
+      if ($config->{build_host}) {
+        $data->{project_href} = ($config->{build_host}->{proto} || 'https')."://$config->{build_host}->{host}/project/show/$data->{info}->{project}";
+      }
       $data->{repository} = $data->{info}->{repository};
       foreach my $tag_val (values %{$data->{info}->{tags}}) {
          foreach my $img (@{$tag_val->{images}}) {
