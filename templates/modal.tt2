@@ -1,0 +1,26 @@
+      <div class="modal fade" id="SettingsDialog" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <h5 class="modal-title">Please choose!</h5>
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	    <div class="modal-body">
+                <p>
+		  <fieldset data-role="controlgroup" data-type="vertical" id="pull_command_selector" name="pull_command_selector">
+		    <input type="radio" id="podman" name="pull_command" value="podman" checked="checked"> 
+		    <label for=podman> podman - the default container runtime in openSUSE Kubic</label><br>
+		    <input type="radio" id="docker" name="pull_command" value="docker">
+		    <label for=docker> docker</label><br>
+		  <fieldset>
+                </p>
+	    </div>
+	    <div class="modal-footer">
+              <small>By clicking the "Settings" button in the main window, this window will show up again and you can change this settings.</small>
+	      <button type="button" class="btn btn-primary" id="modal_save_button">Save</button>
+	    </div>
+	  </div>
+	</div>
+      </div>

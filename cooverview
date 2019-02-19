@@ -28,7 +28,7 @@ if ($ENV{REQUEST_METHOD} eq 'POST') {
   read(*STDIN, $content, $ENV{CONTENT_LENGTH}) || die "Cannot read from stdin $ENV{CONTENT_LENGTH}";
   my $data = decode_json($content);
 
-  create_details_html($drc, $data->{container});
+  create_details_html($drc, $data->{container}, $data->{pull_command});
 } else {
   create_start_page($config, $drc);
 }
@@ -60,13 +60,13 @@ sub create_start_page {
 }
 
 sub create_details_html {
-  my ($drc, $rep) = @_;
+  my ($drc, $rep, $pcommand) = @_;
   my $content;
   my $error;
   my $tags = [];
   my $info;
 
-  my $pull_prefix="docker pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
+  my $pull_prefix="<span class='pcmd'>$pcommand</span> pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
 
   my $data = {
     name => $rep,
