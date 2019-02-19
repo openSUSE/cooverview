@@ -1,13 +1,21 @@
 <html>
   <head>
-    <title>SUSE Container Images Overview</title>
+    <title>openSUSE Container Images Overview</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/cooverview/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/cooverview/css/my.css">
+    <link rel="stylesheet" href="/cooverview/css/cooverview.css">
   </head>
   <body>
     <div class=container>
+      [% INCLUDE modal.tt2 %]
+
       [% INCLUDE header.tt2 %]
+
+      <div style="margin-bottom:10px">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SettingsDialog">
+          Settings
+        </button>
+      </div>
       [% IF error %]
         <div class="alert alert-danger">[% error %]</div>
       [% END %]
@@ -18,6 +26,7 @@
     </div>
     <script src="/cooverview/js/jquery.min.js"></script>
     <script src="/cooverview/js/bootstrap.bundle.min.js"></script>
-    <script src="/cooverview/js/my.js"></script>
+    <script src="/cooverview/js/cooverview.js"></script>
+    <script src="/cooverview/js/js.cookie.js"></script>
   </body>
 </html>
