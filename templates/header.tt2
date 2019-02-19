@@ -1,5 +1,5 @@
     <div class=jumbotron>
-      <h1>SUSE Container Registry/Notary</h1>
+      <h1>openSUSE Container Registry/Notary</h1>
       <h2>Container Images built by OBS</h2>
       <p>You can click on the blue boxes to get detailed information about the
          container image including the known tags and included layers. In the
