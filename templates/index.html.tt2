@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>openSUSE Container Images Overview</title>
+    <title>[% INCLUDE title.tt2 %]</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/cooverview/css/bootstrap.min.css">
     <link rel="stylesheet" href="/cooverview/css/cooverview.css">
@@ -20,7 +20,7 @@
         <div class="alert alert-danger">[% error %]</div>
       [% END %]
       [% FOR rep IN repositories %]
-      <div class='alert alert-suse container-hl' id='hl-[% rep %]'><strong>[% rep %]</strong></div>
+      <div class='alert [% css_class %] container-hl' id='hl-[% rep %]'><strong>[% rep %]</strong></div>
       <div id='details-[% rep %]'></div>
       [% END %]
     </div>

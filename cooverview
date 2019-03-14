@@ -55,6 +55,7 @@ sub create_start_page {
     {
       error        => $error,
       repositories => $repos,
+      css_class    => $config->{css_class} || 'alert-suse',
     }
   ) || die $template->error();
 }

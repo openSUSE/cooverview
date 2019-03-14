@@ -1,4 +1,6 @@
-templates_dir: /etc/cooverview/templates
+templates_dir:
+  - /etc/cooverview/templates.local
+  - /etc/cooverview/templates
 proto: https
 host: test-registry
 port: 443
@@ -9,3 +11,4 @@ use_obs_extended_info: 1
 build_host:
   host: build.opensuse.org
   # proto: https
+# css_class: alert-suse
