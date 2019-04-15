@@ -86,7 +86,7 @@ sub create_start_page {
     {
       error        => $error,
       repositories => $repos,
-      css_class    => $config->{css_class} || 'alert-suse',
+      css_class    => $config->{css_class} || 'alert-opensuse',
       'srch_term'  => $data->{'srch_term'} || '',
     }
   ) || die $template->error();

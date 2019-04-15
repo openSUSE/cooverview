@@ -11,6 +11,6 @@ use_obs_extended_info: 1
 build_host:
   host: build.opensuse.org
   # proto: https
-# css_class: alert-suse
+# css_class: alert-opensuse
 # logit: 0
 # default_search_term: ^(open)?suse/
