@@ -66,11 +66,13 @@ cp contrib/index.html %{buildroot}%{_defaultdocdir}/%{name}/contrib
 %dir %{htdocs_dir}/cooverview/css
 %{htdocs_dir}/cooverview/css/bootstrap.min.css
 %{htdocs_dir}/cooverview/css/cooverview.css
+%{htdocs_dir}/cooverview/css/font-awesome.css
 %{htdocs_dir}/cooverview/js/bootstrap.bundle.min.js
 %{htdocs_dir}/cooverview/js/bootstrap.min.js
 %{htdocs_dir}/cooverview/js/jquery.min.js
 %{htdocs_dir}/cooverview/js/cooverview.js
 %{htdocs_dir}/cooverview/js/js.cookie.js
+%{htdocs_dir}/cooverview/js/font-awesome.min.js
 %{_defaultdocdir}/%{name}/contrib/
 
 %changelog
