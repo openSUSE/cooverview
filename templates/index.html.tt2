@@ -4,6 +4,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/cooverview/css/bootstrap.min.css">
     <link rel="stylesheet" href="/cooverview/css/cooverview.css">
+    <link rel="stylesheet" href="/cooverview/css/font-awesome.css">
   </head>
   <body>
     <div class=container>
@@ -12,10 +13,20 @@
       [% INCLUDE header.tt2 %]
 
       <div style="margin-bottom:10px">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SettingsDialog">
-          Settings
-        </button>
+	    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SettingsDialog">
+	      Settings
+	    </button>
       </div>
+      <div id="predefined_search_patterns">
+        [% INCLUDE predefined_search_buttons.tt2 %]
+      </div>
+      <form method=POST id="search_form">
+	    <div class="form-group has-search" >
+	      <span class="fa fa-search form-control-feedback"></span>
+	      <input type="text" class="form-control" placeholder="Search" name="srch_term" id="srch_term" type="text" value="[% srch_term %]">
+	    </div>
+      </form>
+
       [% IF error %]
         <div class="alert alert-danger">[% error %]</div>
       [% END %]
@@ -26,6 +37,7 @@
     </div>
     <script src="/cooverview/js/jquery.min.js"></script>
     <script src="/cooverview/js/bootstrap.bundle.min.js"></script>
+    <script src="/cooverview/js/font-awesome.min.js"></script>
     <script src="/cooverview/js/cooverview.js"></script>
     <script src="/cooverview/js/js.cookie.js"></script>
   </body>

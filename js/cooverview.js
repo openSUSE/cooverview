@@ -69,3 +69,8 @@ $(document).ready(function(){
   }
 
 });
+
+function update_search(pattern) {
+  $('#srch_term').val(pattern);
+  $('#search_form').submit();
+}

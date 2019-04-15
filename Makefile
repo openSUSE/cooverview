@@ -13,6 +13,7 @@ js:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/js ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/js
 	install -m 644 ./js/bootstrap.bundle.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap.bundle.min.js
 	install -m 644 ./js/bootstrap.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap.min.js
+	install -m 644 ./js/font-awesome.min.js $(DESTDIR)$(HTDOCS_DIR)/js/font-awesome.min.js
 	install -m 644 ./js/jquery.min.js $(DESTDIR)$(HTDOCS_DIR)/js/jquery.min.js
 	install -m 644 ./js/js.cookie.js $(DESTDIR)$(HTDOCS_DIR)/js/js.cookie.js
 	install -m 644 ./js/cooverview.js $(DESTDIR)$(HTDOCS_DIR)/js/cooverview.js
@@ -20,6 +21,7 @@ js:
 css:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/css ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/css
 	install -m 644 ./css/bootstrap.min.css $(DESTDIR)$(HTDOCS_DIR)/css/bootstrap.min.css
+	install -m 644 ./css/font-awesome.css $(DESTDIR)$(HTDOCS_DIR)/css/font-awesome.css
 	install -m 644 ./css/cooverview.css $(DESTDIR)$(HTDOCS_DIR)/css/cooverview.css
 
 config:
@@ -38,5 +40,6 @@ templates:
 	install -m 644 ./templates/details.tt2 $(DESTDIR)/etc/cooverview/templates/details.tt2
 	install -m 644 ./templates/modal.tt2 $(DESTDIR)/etc/cooverview/templates/modal.tt2
 	install -m 644 ./templates/title.tt2 $(DESTDIR)/etc/cooverview/templates/title.tt2
+	install -m 644 ./templates/predefined_search_buttons.tt2 $(DESTDIR)/etc/cooverview/templates/predefined_search_buttons.tt2
 	
 .PHONY: config cgi_bin js css templates

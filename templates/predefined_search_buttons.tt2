@@ -1,0 +1,6 @@
+<b>Predefined Searches:</b><br>
+<button class="btn btn-secondary" onclick="update_search('^(open)?suse/')">Official</button>
+<button class="btn btn-secondary" onclick="update_search('^(?!opensuse|suse|home).*/')">Devel</button>
+<button class="btn btn-secondary" onclick="update_search('^home/')">Home</button>
+<button class="btn btn-secondary" onclick="update_search('.*')">All</button>
+
