@@ -54,7 +54,7 @@ $(document).ready(function(){
   $("#modal_save_button").click(function() {
     pull_command = $('#pull_command_selector :radio:checked').val();
     $("#SettingsDialog").modal('hide');
-    Cookies.set('pull_command', pull_command);
+    Cookies.set('pull_command', pull_command, {expires : 365});
     $('.pcmd').each(function() {
       $(this).text(pull_command);
     });
