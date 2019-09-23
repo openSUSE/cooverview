@@ -1,5 +1,5 @@
 [% IF error %]
-<div class='alert alert-danger'>[% error %]</div>
+<div class='alert-danger'>[% error %]</div>
 [% ELSE %]
 [% USE date %]
 <div class=mb-3>
@@ -112,43 +112,45 @@
       [% END %]
     </tbody>
   </table>
+  </div>
   [% ELSE %]
-  <div class=row>
-    <div class=col-md-1>
-      Tag:
+  <div id="collapse[% uniquetag %]" class="collapse">
+    [% IF tag_hash.manifest.tag %]
+    <div class='card-body'>
+      <strong>
+        Tag:
+      </strong>
+      <p>
+        [% tag_hash.manifest.tag %]
+      </p>
     </div>
-    <div class=col-md-11>
-      [% tag_hash.manifest.tag %]
+    [% END %]
+    [% IF tag_hash.manifest.architecture %]
+    <div class='card-body'>
+      <strong>
+        Arch:
+      </strong>
+      <p>
+        [% tag_hash.manifest.architecture %]
+      </p>
     </div>
-  </div>
-  <div class=row>
-    <div class=col-md-1>
-      Arch:
+    [% END %]
+    [% IF tag_hash.manifest.fsLayers %]
+    <div class='list-group list-group-flush'>
+    <div class='list-group-item bg-light'>
+      <strong>
+        Layers:
+      </strong>
     </div>
-    <div class=col-md-11>
-      [% tag_hash.manifest.architecture %]
+    [% FOR layer IN tag_hash.manifest.fsLayers %]
+      <div class='list-group-item'>
+        [% layer.blobSum %]
+      </div>
+    [% END %]
     </div>
-  </div>
-  <div class=row>
-    <div class=col-md-1>
-      Layers:
-    </div>
-    <div class=col-md-11>
-    </div>
-  </div>
-
-  [% FOR layer IN tag_hash.manifest.fsLayers %]
-  <div class=row>
-    <div class=col-md-1>
-    </div>
-    <div class=col-md-11>
-      [% layer.blobSum %]
-    </div>
+    [% END %]
   </div>
   [% END %]
-  [% END %]
-</div>
 [% END %]
 [% END %]
-</div>
 <!-- IF error -->
