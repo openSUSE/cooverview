@@ -86,7 +86,9 @@ sub create_start_page {
     {
       error        => $error,
       repositories => $repos,
-      css_class    => $config->{css_class} || 'alert-suse',
+      css_class    => $config->{css_class} || 'btn-link',
+      use_obs_extended_info => $config->{use_obs_extended_info},
+      build_host => $config->{build_host},
       'srch_term'  => $data->{'srch_term'} || '',
     }
   ) || die $template->error();
@@ -99,7 +101,7 @@ sub create_details_html {
   my $tags = [];
   my $info;
 
-  my $pull_prefix="<span class='pcmd'>$pcommand</span> pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
+  my $pull_prefix="$pcommand pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
 
   my $data = {
     name => $rep,

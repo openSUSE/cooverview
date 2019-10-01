@@ -65,7 +65,6 @@ cp contrib/index.html %{buildroot}%{_defaultdocdir}/%{name}/contrib
 %dir %{htdocs_dir}/cooverview/js
 %dir %{htdocs_dir}/cooverview/css
 %{htdocs_dir}/cooverview/css/bootstrap.min.css
-%{htdocs_dir}/cooverview/css/cooverview.css
 %{htdocs_dir}/cooverview/css/font-awesome.css
 %{htdocs_dir}/cooverview/js/bootstrap.bundle.min.js
 %{htdocs_dir}/cooverview/js/bootstrap.min.js

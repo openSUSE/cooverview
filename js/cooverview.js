@@ -6,8 +6,10 @@ function load_and_update () {
   //console.log("This: " + $(this).attr('id') );
   var container = $(this).attr('id').replace("hl-","");
   var details = jQuery('div[id*="details-' + container + '"]');
+  var spinner = $(this).find('#spinner');
 
   if ( details.html() == '' ) {
+    spinner.removeClass('d-none');
     var request = $.ajax({
       url: "cooverview",
       method: "POST",
@@ -21,25 +23,40 @@ function load_and_update () {
 	alert("something went wrong");
       },
       complete: function(msg){
-	details.html(msg.responseText);}
-    });
-    $(".layers-button").each(function(i,elem){
-      $(elem).on('click',toogle_layer);
+	details.html(msg.responseText);
+	spinner.addClass('d-none');
+	details.parent().collapse('show');
+      }
     });
   } else {
-    details.html('');
+    details.parent().collapse('toggle');
   }
+}
+function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+  textArea.style.position = 'fixed';
+  textArea.class = 'd-none'
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textArea);
+  return false;
 }
 
-function toogle_layer (id) {
-  var element = $('#layers-' + id );
-  var css_display = element.css("display");
-  if ( css_display == "none" ) {
-      element.css("display","block");
-  } else {
-      element.css("display","none");
+$(document).on('click', '#clipboard', function(){
+  var text = $(this).data("copy");
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return false;
   }
-}
+  navigator.clipboard.writeText(text);
+  return false;
+});
+$(document).on('click', '#unclickable', function(){
+  return false;
+});
 
 $(document).ready(function(){
   // set action for click event for each container bar

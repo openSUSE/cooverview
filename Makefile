@@ -22,7 +22,6 @@ css:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/css ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/css
 	install -m 644 ./css/bootstrap.min.css $(DESTDIR)$(HTDOCS_DIR)/css/bootstrap.min.css
 	install -m 644 ./css/font-awesome.css $(DESTDIR)$(HTDOCS_DIR)/css/font-awesome.css
-	install -m 644 ./css/cooverview.css $(DESTDIR)$(HTDOCS_DIR)/css/cooverview.css
 
 config:
 	[ -d $(DESTDIR)/etc/cooverview ] || mkdir -p $(DESTDIR)/etc/cooverview

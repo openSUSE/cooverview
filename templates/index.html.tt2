@@ -3,37 +3,46 @@
     <title>[% INCLUDE title.tt2 %]</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="/cooverview/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/cooverview/css/cooverview.css">
     <link rel="stylesheet" href="/cooverview/css/font-awesome.css">
   </head>
   <body>
+    [% INCLUDE modal.tt2 %]
+    [% INCLUDE header.tt2 %]
     <div class=container>
-      [% INCLUDE modal.tt2 %]
-
-      [% INCLUDE header.tt2 %]
-
-      <div style="margin-bottom:10px">
-	    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SettingsDialog">
-	      Settings
-	    </button>
-      </div>
-      <div id="predefined_search_patterns">
+      <div class='form-inline' id="predefined_search_patterns">
         [% INCLUDE predefined_search_buttons.tt2 %]
-      </div>
-      <form method=POST id="search_form">
+        <form class='mb-2 ml-md-auto' method=POST id="search_form">
 	    <div class="form-group has-search" >
-	      <span class="fa fa-search form-control-feedback"></span>
+	      <div class="input-group">
+	      <div class="input-group-prepend">
+	        <span class="input-group-text"><i class="fa fa-search"></i></span>
+	      </div>
 	      <input type="text" class="form-control" placeholder="Search" name="srch_term" id="srch_term" type="text" value="[% srch_term %]">
 	    </div>
-      </form>
+	    </div>
+        </form>
+      </div>
 
       [% IF error %]
         <div class="alert alert-danger">[% error %]</div>
       [% END %]
+      
       [% FOR rep IN repositories %]
-      <div class='alert [% css_class %] container-hl' id='hl-[% rep %]'><strong>[% rep %]</strong></div>
-      <div id='details-[% rep %]'></div>
+      <div class="card mb-2">
+        <div class='card-header d-flex justify-content-between align-items-center [% css_class %] container-hl' id='hl-[% rep %]'>
+          <span>
+            <i class='fas fa-box'></i> [% rep %]
+          </span>
+          <span id='spinner' class='d-none'>
+            <i class='fas fa-sync fa-spin'></i>
+          </span>
+        </div>
+        <div class='collapse'>
+          <div class='card-body' id='details-[% rep %]'></div>
+        </div>
+      </div>
       [% END %]
+      
     </div>
     <script src="/cooverview/js/jquery.min.js"></script>
     <script src="/cooverview/js/bootstrap.bundle.min.js"></script>
