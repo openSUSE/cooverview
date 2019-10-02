@@ -7,6 +7,7 @@
   </head>
   <body>
     [% INCLUDE modal.tt2 %]
+    [% INCLUDE navbar.tt2 %]
     [% INCLUDE header.tt2 %]
     <div class=container>
       <div class='form-inline' id="predefined_search_patterns">

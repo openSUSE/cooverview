@@ -39,6 +39,7 @@ templates:
 	install -m 644 ./templates/details.tt2 $(DESTDIR)/etc/cooverview/templates/details.tt2
 	install -m 644 ./templates/modal.tt2 $(DESTDIR)/etc/cooverview/templates/modal.tt2
 	install -m 644 ./templates/title.tt2 $(DESTDIR)/etc/cooverview/templates/title.tt2
+	install -m 644 ./templates/navbar.tt2 $(DESTDIR)/etc/cooverview/templates/navbar.tt2
 	install -m 644 ./templates/predefined_search_buttons.tt2 $(DESTDIR)/etc/cooverview/templates/predefined_search_buttons.tt2
 	
 .PHONY: config cgi_bin js css templates

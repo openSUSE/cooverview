@@ -1,30 +1,3 @@
-    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-      <a class='navbar-brand' href='https://opensuse.org' title='openSUSE'><i class='fab fa-suse text-success'></i></a>
-      <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-        <span class='navbar-toggler-icon'></span>
-      </button>
-    
-      <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-        <ul class='navbar-nav mr-auto'>
-          <li class='nav-item active'>
-            <a class='nav-link' href='/'>Registry<span class='sr-only'> (current)</span></a>
-          </li>
-          [% IF use_obs_extended_info %]
-          <li class='nav-item'>
-            <a class='nav-link' href='[% IF build_host.proto %][% build_host.proto %][% ELSE %]https[% END %]://[% build_host.host %]'>OBS</a>
-          </li>
-          [% END %]
-        </ul>
-        <div class='form-inline'>
-          <button type='button' class='btn btn-primary mr-2' data-toggle='modal' data-target='#SettingsDialog'>
-	    Settings
-	  </button>
-          <a class='btn btn-outline-light' href='https://github.com/M0ses/cooverview'><i class='fab fa-github'></i> Project on GitHub</a>
-	</div>
-      </div>
-    </nav>
-
-    </div>
     <div class='jumbotron'>
       <div class='container'>
         <h1>openSUSE Container Registry/Notary</h1>
