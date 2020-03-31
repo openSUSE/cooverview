@@ -9,6 +9,7 @@ use Net::Docker::Registry::Client;
 use Template;
 use Encode;
 use URI::Escape;
+use List::Util qw(first reduce);
 
 my $cfg_file = "/etc/cooverview/config.yml";
 
@@ -138,7 +139,18 @@ sub create_details_html {
 	   $img->{id} =~ s/.*://;
 	   $img->{id} = substr $img->{id}, 0, 12;
 	 }
+	 my $newest = reduce { $a->{buildtime} > $b->{buildtime} ? $a : $b } @{$tag_val->{images}};
+	 $tag_val->{buildtime} = $newest->{buildtime};
       }
+      foreach my $tag (@{$data->{tags}}) {
+        $tag->{buildtime} = @{$data->{info}->{tags}}{$tag->{tag}}->{buildtime};
+      }
+      @{$data->{tags}} = sort { $b->{buildtime} <=> $a->{buildtime} || $a->{tag} cmp $b->{tag} } @{$data->{tags}};
+    }
+    if ($#{$data->{tags}} > 0) {
+      my $latest_index = first { @{$data->{tags}}[$_]->{tag} eq 'latest' } 0..$#{$data->{tags}};
+      my $latest = splice(@{$data->{tags}}, $latest_index, 1);
+      unshift(@{$data->{tags}}, $latest);
     }
   };
   $data->{error} = $@ if $@;
