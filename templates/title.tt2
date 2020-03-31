@@ -1,1 +1,1 @@
-openSUSE Container Images Overview
+[% IF theme.vendor %][% theme.vendor %] [% END %]Registry
