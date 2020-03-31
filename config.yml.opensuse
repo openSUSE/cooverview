@@ -9,6 +9,6 @@ use_obs_extended_info: 1
 build_host:
   host: build.opensuse.org
 theme:
-  css: //static.opensuse.org/chameleon/dist/css/chameleon.css
-  logo: //static.opensuse.org/chameleon/dist/images/logo/logo-white.svg
+  css: https://static.opensuse.org/chameleon/dist/css/chameleon.css
+  logo: https://static.opensuse.org/chameleon/dist/images/logo/logo-white.svg
   vendor: openSUSE
