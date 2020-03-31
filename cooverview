@@ -50,7 +50,7 @@ if ($ENV{REQUEST_METHOD} eq 'POST') {
   create_start_page(
     $config,
     $drc,
-    {srch_term => $config->{default_search_term} || '^(open)?suse/'},
+    {srch_term => $config->{default_search_term} || '^((open)?suse|kubic)/'},
   );
 }
 
