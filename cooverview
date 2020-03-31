@@ -7,6 +7,8 @@ use Data::Dumper;
 use JSON::MaybeXS;
 use Net::Docker::Registry::Client;
 use Template;
+use Encode;
+use URI::Escape;
 
 my $cfg_file = "/etc/cooverview/config.yml";
 
@@ -47,10 +49,11 @@ if ($ENV{REQUEST_METHOD} eq 'POST') {
     create_details_html($drc, $data->{container}, $data->{pull_command});
   }
 } else {
+  my %search = split(/[&=]/, $ENV{QUERY_STRING} || "");
   create_start_page(
     $config,
     $drc,
-    {srch_term => $config->{default_search_term} || '^((open)?suse|kubic)/'},
+    {srch_term => Encode::decode('utf8', uri_unescape($search{q})) || $config->{default_search_term} || '^((open)?suse|kubic)/'},
   );
 }
 
