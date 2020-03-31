@@ -45,6 +45,7 @@
       [% END %]
       
     </div>
+    [% INCLUDE footer.tt2 %]
     <script src="/cooverview/js/jquery.min.js"></script>
     <script src="/cooverview/js/bootstrap.bundle.min.js"></script>
     <script src="/cooverview/js/font-awesome.min.js"></script>

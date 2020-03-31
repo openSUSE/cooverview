@@ -1,4 +1,4 @@
-    <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+    <nav class='navbar navbar-expand-lg'>
       <a class='navbar-brand' href='https://opensuse.org' title='openSUSE'>
         [% IF theme.logo %]
         <img class="mr-2" src="[% theme.logo %]" alt="[% theme.vendor %]"/>
@@ -13,20 +13,20 @@
 
       <div class='collapse navbar-collapse' id='navbarSupportedContent'>
         <ul class='navbar-nav mr-auto'>
-          <li class='nav-item active'>
-            <a class='nav-link' href='/'>Registry<span class='sr-only'> (current)</span></a>
-          </li>
           [% IF use_obs_extended_info %]
           <li class='nav-item'>
-            <a class='nav-link' href='[% IF build_host.proto %][% build_host.proto %][% ELSE %]https[% END %]://[% build_host.host %]'>OBS</a>
+            <a class='nav-link' href='[% IF build_host.proto %][% build_host.proto %][% ELSE %]https[% END %]://[% build_host.host %]'>
+              <i class="fas fa-industry"></i>
+              Build Service
+            </a>
           </li>
           [% END %]
         </ul>
         <div class='form-inline'>
           <button type='button' class='btn btn-primary mr-2' data-toggle='modal' data-target='#SettingsDialog'>
+            <i class="fas fa-tools"></i>
             Settings
           </button>
-          <a class='btn btn-outline-light' href='https://github.com/M0ses/cooverview'><i class='fab fa-github'></i> Project on GitHub</a>
         </div>
       </div>
     </nav>

@@ -36,6 +36,7 @@ templates:
 	  mkdir -p $(DESTDIR)/etc/cooverview/templates
 	install -m 644 ./templates/index.html.tt2 $(DESTDIR)/etc/cooverview/templates/index.html.tt2
 	install -m 644 ./templates/header.tt2 $(DESTDIR)/etc/cooverview/templates/header.tt2
+	install -m 644 ./templates/footer.tt2 $(DESTDIR)/etc/cooverview/templates/footer.tt2
 	install -m 644 ./templates/details.tt2 $(DESTDIR)/etc/cooverview/templates/details.tt2
 	install -m 644 ./templates/modal.tt2 $(DESTDIR)/etc/cooverview/templates/modal.tt2
 	install -m 644 ./templates/title.tt2 $(DESTDIR)/etc/cooverview/templates/title.tt2

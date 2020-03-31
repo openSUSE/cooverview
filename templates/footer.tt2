@@ -1,0 +1,13 @@
+      [% USE date %]
+      <footer class="footer">
+        <div class="container">
+          <div class="d-flex justify-content-between">
+            <span>
+              © 2018 - [% date.format(format = '%Y') %] cooverview contributors
+            </span>
+            <a href="https://github.com/M0ses/cooverview">
+              Source Code
+            </a>
+          </div>
+        </div>
+      </footer>

@@ -90,7 +90,7 @@ sub create_start_page {
     {
       error        => $error,
       repositories => $repos,
-      css_class    => $config->{css_class} || 'btn-link',
+      css_class    => $config->{css_class} || 'btn-link text-decoration-none',
       theme        => $config->{theme},
       use_obs_extended_info => $config->{use_obs_extended_info},
       build_host => $config->{build_host},
