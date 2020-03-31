@@ -30,7 +30,7 @@
       
       [% FOR rep IN repositories %]
       <div class="card mb-2">
-        <div class='card-header d-flex justify-content-between align-items-center [% css_class %] container-hl' id='hl-[% rep %]'>
+        <div class='card-header d-flex justify-content-between align-items-center [% css_class %] container-hl' id='[% rep | remove('[^A-Za-z0-9-_]+') %]' data-container='[% rep %]'>
           <span>
             <i class='fas fa-box'></i> [% rep %]
           </span>
@@ -39,7 +39,7 @@
           </span>
         </div>
         <div class='collapse'>
-          <div class='card-body' id='details-[% rep %]'></div>
+          <div class='card-body' id='details-[% rep | remove('[^A-Za-z0-9-_]+') %]'></div>
         </div>
       </div>
       [% END %]
