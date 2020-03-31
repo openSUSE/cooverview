@@ -43,13 +43,13 @@
   </div>
   [% IF use_obs_extended_info %]
   <div id="collapse[% uniquetag %]" class="collapse">
-  <table class="table mb-0 border-bottom table-borderless table-hover">
+  <table class="table mb-0 border-bottom table-borderless table-hover table-responsive">
     <thead>
       <tr>
-        <th scope="col">Image ID</th>
-        <th scope="col">Build Arch</th>
-        <th scope="col">Build Time</th>
-        <th scope="col">OS</th>
+        <th class="w-25" scope="col">Image ID</th>
+        <th class="w-25" scope="col">Build Arch</th>
+        <th class="w-25" scope="col">Build Time</th>
+        <th class="w-25" scope="col">OS</th>
         <th scope="col">DistUrl</th>
       </tr>
     </thead>

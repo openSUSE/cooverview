@@ -4,8 +4,8 @@ var pull_command;
 
 function load_and_update () {
   //console.log("This: " + $(this).attr('id') );
-  var container = $(this).attr('id').replace("hl-","");
-  var details = jQuery('div[id*="details-' + container + '"]');
+  var container = $(this).data("container");
+  var details = $('#details-' + $(this).attr('id'));
   var spinner = $(this).find('#spinner');
 
   if ( details.html() == '' ) {

@@ -7,6 +7,9 @@ use Data::Dumper;
 use JSON::MaybeXS;
 use Net::Docker::Registry::Client;
 use Template;
+use Encode;
+use URI::Escape;
+use List::Util qw(first reduce);
 
 my $cfg_file = "/etc/cooverview/config.yml";
 
@@ -47,10 +50,11 @@ if ($ENV{REQUEST_METHOD} eq 'POST') {
     create_details_html($drc, $data->{container}, $data->{pull_command});
   }
 } else {
+  my %search = split(/[&=]/, $ENV{QUERY_STRING} || "");
   create_start_page(
     $config,
     $drc,
-    {srch_term => $config->{default_search_term} || '^(open)?suse/'},
+    {srch_term => Encode::decode('utf8', uri_unescape($search{q})) || $config->{default_search_term} || '^((open)?suse|kubic)/'},
   );
 }
 
@@ -86,7 +90,8 @@ sub create_start_page {
     {
       error        => $error,
       repositories => $repos,
-      css_class    => $config->{css_class} || 'btn-link',
+      css_class    => $config->{css_class} || 'btn-link text-decoration-none',
+      theme        => $config->{theme},
       use_obs_extended_info => $config->{use_obs_extended_info},
       build_host => $config->{build_host},
       'srch_term'  => $data->{'srch_term'} || '',
@@ -135,7 +140,18 @@ sub create_details_html {
 	   $img->{id} =~ s/.*://;
 	   $img->{id} = substr $img->{id}, 0, 12;
 	 }
+	 my $newest = reduce { $a->{buildtime} > $b->{buildtime} ? $a : $b } @{$tag_val->{images}};
+	 $tag_val->{buildtime} = $newest->{buildtime};
       }
+      foreach my $tag (@{$data->{tags}}) {
+        $tag->{buildtime} = @{$data->{info}->{tags}}{$tag->{tag}}->{buildtime};
+      }
+      @{$data->{tags}} = sort { $b->{buildtime} <=> $a->{buildtime} || $a->{tag} cmp $b->{tag} } @{$data->{tags}};
+    }
+    if ($#{$data->{tags}} > 0) {
+      my $latest_index = first { @{$data->{tags}}[$_]->{tag} eq 'latest' } 0..$#{$data->{tags}};
+      my $latest = splice(@{$data->{tags}}, $latest_index, 1);
+      unshift(@{$data->{tags}}, $latest);
     }
   };
   $data->{error} = $@ if $@;
