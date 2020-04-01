@@ -139,6 +139,9 @@ sub create_details_html {
            $img->{id} = $img->{imageid};
 	   $img->{id} =~ s/.*://;
 	   $img->{id} = substr $img->{id}, 0, 12;
+	   $img->{size} = 0;
+           $img->{size} += $_->{blobsize} for @{$img->{layers}};
+           $img->{size} = int($img->{size} / (1024 * 1024)) . "MB";
 	 }
 	 my $newest = reduce { $a->{buildtime} > $b->{buildtime} ? $a : $b } @{$tag_val->{images}};
 	 $tag_val->{buildtime} = $newest->{buildtime};
@@ -154,6 +157,8 @@ sub create_details_html {
       unshift(@{$data->{tags}}, $latest);
     }
   };
+
+
   $data->{error} = $@ if $@;
   $template->process('details.tt2', $data) || die $template->error();
 }
@@ -162,6 +167,7 @@ sub logit {
   my ($msg) = @_;
   return unless $config->{logit};
   open(my $fh, '>>', '/tmp/cooverview.log') || die "Could not open /tmp/cooverview.log: $!";
-  print $fh (ref $msg) ? Dumper($msg) : $msg;
+  $msg = (ref $msg) ? Dumper($msg) : $msg;
+  print $fh $msg;
   close $fh;
 }

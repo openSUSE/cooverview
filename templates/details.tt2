@@ -50,6 +50,7 @@
         <th class="w-25" scope="col">Build Arch</th>
         <th class="w-25" scope="col">Build Time</th>
         <th class="w-25" scope="col">OS</th>
+        <th class="w-25" scope="col">Size</th>
         <th scope="col">DistUrl</th>
       </tr>
     </thead>
@@ -64,6 +65,7 @@
         [% END %]
         </td>
         <td>[% img.goos %] ([% img.goarch %])</td>
+        <td>[% img.size %]</td>
         <td>
           <button class="btn btn-link text-dark p-1" id='clipboard' title='Copy disturl to clipboard' data-copy="[% img.disturl %]">
          <i class='fas fa-link'></i>
