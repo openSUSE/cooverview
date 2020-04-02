@@ -5,7 +5,7 @@
             <span>
               © 2018 - [% date.format(format = '%Y') %] cooverview contributors
             </span>
-            <a href="https://github.com/M0ses/cooverview">
+            <a href="https://github.com/openSUSE/cooverview">
               Source Code
             </a>
           </div>
