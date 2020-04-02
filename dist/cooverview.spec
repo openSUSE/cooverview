@@ -24,7 +24,7 @@ Release:        0
 Summary:        A simple CGI script to read and display container info from a docker registry
 License:        GPL-2.0-or-later
 Group:          Productivity/Networking/Web/Frontends
-Url:            https://github.com/M0ses/cooverview
+Url:            https://github.com/openSUSE/cooverview
 Source:         %{name}-%{version}.tar.xz
 #BuildRequires:  
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
