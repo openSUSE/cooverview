@@ -14,3 +14,7 @@ build_host:
 # css_class: alert-suse
 # logit: 0
 # default_search_term: ^(open)?suse/
+theme:
+  css: /cooverview/css/chameleon.css
+  logo: /cooverview/img/logo-white.svg
+  vendor: myVendor
