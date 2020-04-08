@@ -3,7 +3,7 @@ WWW_DIR ?= /srv/www
 CGI_DIR ?= $(WWW_DIR)/cgi-bin
 HTDOCS_DIR ?= $(WWW_DIR)/htdocs/cooverview
 
-install: cgi_bin js css templates
+install: cgi_bin js css templates img
 
 cgi_bin:
 	[ -d $(DESTDIR)$(CGI_DIR) ] || mkdir -p $(DESTDIR)$(CGI_DIR)
@@ -22,6 +22,7 @@ css:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/css ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/css
 	install -m 644 ./css/bootstrap.min.css $(DESTDIR)$(HTDOCS_DIR)/css/bootstrap.min.css
 	install -m 644 ./css/font-awesome.css $(DESTDIR)$(HTDOCS_DIR)/css/font-awesome.css
+	install -m 644 ./css/chameleon.css $(DESTDIR)$(HTDOCS_DIR)/css/chameleon.css
 
 config:
 	[ -d $(DESTDIR)/etc/cooverview ] || mkdir -p $(DESTDIR)/etc/cooverview
@@ -30,6 +31,10 @@ config:
 	else \
 		install -m 644 ./config.yml.template $(DESTDIR)/etc/cooverview/config.yml;\
 	fi
+
+img:
+	[ -d $(DESTDIR)$(HTDOCS_DIR)/img ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/img
+	cp ./img/logo-white.svg $(DESTDIR)$(HTDOCS_DIR)/img/
 
 templates:
 	[ -d $(DESTDIR)/etc/cooverview/templates ] || \
@@ -43,4 +48,4 @@ templates:
 	install -m 644 ./templates/navbar.tt2 $(DESTDIR)/etc/cooverview/templates/navbar.tt2
 	install -m 644 ./templates/predefined_search_buttons.tt2 $(DESTDIR)/etc/cooverview/templates/predefined_search_buttons.tt2
 	
-.PHONY: config cgi_bin js css templates
+.PHONY: config cgi_bin js css templates img
