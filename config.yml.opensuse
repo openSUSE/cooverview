@@ -4,10 +4,16 @@ templates_dir:
 proto: https
 host: registry.opensuse.org
 port: 443
+# user: myuser
+# pass: mypass
 pull_host: registry.opensuse.org
 use_obs_extended_info: 1
 build_host:
   host: build.opensuse.org
+  # proto: https
+# css_class: alert-suse
+# logit: 0
+# default_search_term: ^(open)?suse/
 theme:
   css: https://static.opensuse.org/chameleon/dist/css/chameleon.css
   logo: https://static.opensuse.org/chameleon/dist/images/logo/logo-white.svg
