@@ -13,4 +13,31 @@ build_host:
   # proto: https
 # css_class: alert-suse
 # logit: 0
-# default_search_term: ^(open)?suse/
+
+theme:
+  css: /cooverview/themes/opensuse/css/chameleon.css
+  logo: /cooverview/themes/opensuse/img/logo-white.svg
+  vendor: myVendor
+
+################################################################################
+# Filtering projects
+################################################################################
+# default_search_term: ".*"
+filter_source_projects: 1
+search_buttons:
+  -
+     name:        Official
+     search_term: "^openSUSE:Containers"
+     css_class: success
+  -
+     name: Devel
+     search_term: "^(?!(open)?SUSE:|kubic:|home:).*"
+     css_class: warning
+  -
+     name: Home
+     search_term: "^home:"
+     css_class: danger
+  -
+     name: All
+     search_term: ""
+     css_class: primary

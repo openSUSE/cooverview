@@ -4,11 +4,40 @@ templates_dir:
 proto: https
 host: registry.opensuse.org
 port: 443
+# user: myuser
+# pass: mypass
 pull_host: registry.opensuse.org
 use_obs_extended_info: 1
 build_host:
   host: build.opensuse.org
+  # proto: https
+# css_class: alert-suse
+# logit: 0
+
 theme:
-  css: https://static.opensuse.org/chameleon/dist/css/chameleon.css
-  logo: https://static.opensuse.org/chameleon/dist/images/logo/logo-white.svg
+  css: /cooverview/themes/opensuse/css/chameleon.css
+  logo: /cooverview/themes/opensuse/img/logo-white.svg
   vendor: openSUSE
+
+################################################################################
+# Filtering projects
+################################################################################
+# default_search_term: ".*"
+filter_source_projects: 1
+search_buttons:
+  -
+     name:        Official
+     search_term: "^openSUSE:Containers"
+     css_class: success
+  -
+     name: Devel
+     search_term: "^(?!(open)?SUSE:|kubic:|home:).*"
+     css_class: warning
+  -
+     name: Home
+     search_term: "^home:"
+     css_class: danger
+  -
+     name: All
+     search_term: ""
+     css_class: primary
