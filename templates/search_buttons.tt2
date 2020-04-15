@@ -1,0 +1,3 @@
+[% FOR btn IN search_buttons %]
+  <button class="btn btn-[% btn.css_class %] mr-2 mb-2" onclick="update_search('[% btn.search_term %]')">[% btn.name %]</button>
+[% END %]
