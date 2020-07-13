@@ -27,15 +27,15 @@ filter_source_projects: 1
 search_buttons:
   -
      name:        Official
-     search_term: "^openSUSE:Containers"
+     search_term: "project=^openSUSE:Containers container=.*"
      css_class: success
   -
      name: Devel
-     search_term: "^(?!(open)?SUSE:|kubic:|home:).*"
+     search_term: "project=^(?!(open)?SUSE:|kubic:|home:).*"
      css_class: warning
   -
      name: Home
-     search_term: "^home:"
+     search_term: "project=^home:"
      css_class: danger
   -
      name: All
