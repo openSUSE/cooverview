@@ -64,11 +64,11 @@
           <span title='[% date.format(img.buildtime, ' %d-%b-%Y %H:%M:%S ') %] ([% img.buildtime %])'>[% date.format(img.buildtime, '%d. %b %Y') %]</span>
         [% END %]
         </td>
-        <td>[% img.goos %] ([% img.goarch %])</td>
+        <td>[% img.goos %] ([% img.goarch %][% IF img.govariant %] [% img.govariant %][% END %])</td>
         <td>[% img.size %]</td>
         <td>
           <button class="btn btn-link text-dark p-1" id='clipboard' title='Copy disturl to clipboard' data-copy="[% img.disturl %]">
-         <i class='fas fa-link'></i>
+         <i class='fas fa-link dist-url-link'></i>
          </button>
         </td>
       </tr>
@@ -137,16 +137,16 @@
       </p>
     </div>
     [% END %]
-    [% IF tag_hash.manifest.fsLayers %]
+    [% IF tag_hash.manifest.manifests %]
     <div class='list-group list-group-flush'>
     <div class='list-group-item bg-light'>
       <strong>
         Layers:
       </strong>
     </div>
-    [% FOR layer IN tag_hash.manifest.fsLayers %]
+    [% FOR manifest IN tag_hash.manifest.manifests %]
       <div class='list-group-item'>
-        [% layer.blobSum %]
+        [% manifest.platform.os %] ([% manifest.platform.architecture %]) - [% manifest.digest %]
       </div>
     [% END %]
     </div>
