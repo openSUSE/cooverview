@@ -27,7 +27,14 @@ my $template = Template->new($tconfig);
 
 print "Content-type:text/html\r\n\r\n";
 
-my $stm_internal = '^openSUSE:Containers:';
+my $predefined_search_buttons = [
+  {name => "Official (default)", search_term => "project=^openSUSE:Containers: container=.*", css_class => 'success' },
+  {name => "Devel (default)"   , search_term => "project=^(?!(open)?SUSE|kubic|home):')"    , css_class => 'warning' },
+  {name => "Home (default)"    , search_term => "project=^home"                             , css_class => 'danger'  },
+  {name => "All (default)"     , search_term => ""                                          , css_class => 'primary' },
+];
+
+my $stm_internal = $predefined_search_buttons->[0]->{search_term};
 
 my $template_default_data = {
     default_search_term => $config->{default_search_term}
@@ -113,13 +120,6 @@ sub create_start_page {
     @{$repos} = sort @{$tmp_repos};
   }
 
-
-  my $predefined_search_buttons = [
-    {name => "Official (default)", search_term => "project=^openSUSE:Containers: container=.*", css_class => 'success' },
-    {name => "Devel (default)"   , search_term => "project=^(?!(open)?SUSE|kubic|home):')"    , css_class => 'warning' },
-    {name => "Home (default)"    , search_term => "project=^home"                             , css_class => 'danger'  },
-    {name => "All (default)"     , search_term => ""                                          , css_class => 'primary' },
-  ];
 
   my $sb = $config->{search_buttons} || $predefined_search_buttons;
 
