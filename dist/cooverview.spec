@@ -53,7 +53,8 @@ cp contrib/index.html %{buildroot}%{_defaultdocdir}/%{name}/contrib
 
 %files
 %defattr(-,root,root)
-%doc README.md LICENSE
+%doc README.md
+%license LICENSE
 %dir %{cgi_dir}
 %{cgi_dir}/*
 %dir /etc/cooverview/
@@ -72,6 +73,9 @@ cp contrib/index.html %{buildroot}%{_defaultdocdir}/%{name}/contrib
 %{htdocs_dir}/cooverview/js/cooverview.js
 %{htdocs_dir}/cooverview/js/js.cookie.js
 %{htdocs_dir}/cooverview/js/font-awesome.min.js
+%dir %{htdocs_dir}/cooverview/themes/
+%{htdocs_dir}/cooverview/themes/suse/
+%{htdocs_dir}/cooverview/themes/opensuse/
 %{_defaultdocdir}/%{name}/contrib/
 
 %changelog

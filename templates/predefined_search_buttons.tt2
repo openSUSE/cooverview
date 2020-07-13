@@ -1,5 +1,0 @@
-<button class="btn btn-success mr-2 mb-2" onclick="update_search('^((open)?suse|kubic)/')">Official</button>
-<button class="btn btn-warning mr-2 mb-2" onclick="update_search('^(?!(open)?suse|kubic|home).*/')">Devel</button>
-<button class="btn btn-danger mr-2 mb-2" onclick="update_search('^home/')">Home</button>
-<button class="btn btn-primary mr-2 mb-2" onclick="update_search('.*')">All</button>
-

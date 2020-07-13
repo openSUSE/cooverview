@@ -3,7 +3,7 @@ WWW_DIR ?= /srv/www
 CGI_DIR ?= $(WWW_DIR)/cgi-bin
 HTDOCS_DIR ?= $(WWW_DIR)/htdocs/cooverview
 
-install: cgi_bin js css templates
+install: cgi_bin js css templates themes
 
 cgi_bin:
 	[ -d $(DESTDIR)$(CGI_DIR) ] || mkdir -p $(DESTDIR)$(CGI_DIR)
@@ -41,6 +41,20 @@ templates:
 	install -m 644 ./templates/modal.tt2 $(DESTDIR)/etc/cooverview/templates/modal.tt2
 	install -m 644 ./templates/title.tt2 $(DESTDIR)/etc/cooverview/templates/title.tt2
 	install -m 644 ./templates/navbar.tt2 $(DESTDIR)/etc/cooverview/templates/navbar.tt2
-	install -m 644 ./templates/predefined_search_buttons.tt2 $(DESTDIR)/etc/cooverview/templates/predefined_search_buttons.tt2
+	install -m 644 ./templates/search_buttons.tt2 $(DESTDIR)/etc/cooverview/templates/search_buttons.tt2
+
+themes: theme_suse theme_opensuse
+
+theme_opensuse:
+	[ -d $(DESTDIR)$(HTDOCS_DIR)/themes/opensuse/css/ ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/themes/opensuse/css/
+	[ -d $(DESTDIR)$(HTDOCS_DIR)/themes/opensuse/img/ ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/themes/opensuse/img/
+	install -m 644 ./themes/opensuse/css/chameleon.css  $(DESTDIR)$(HTDOCS_DIR)/themes/opensuse/css/chameleon.css
+	install -m 644 ./themes/opensuse/img/logo-white.svg $(DESTDIR)$(HTDOCS_DIR)/themes/opensuse/img/logo-white.svg
+
+theme_suse:
+	[ -d $(DESTDIR)$(HTDOCS_DIR)/themes/suse/css/ ]     || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/themes/suse/css/
+	[ -d $(DESTDIR)$(HTDOCS_DIR)/themes/suse/img/ ]     || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/themes/suse/img/
+	install -m 644 ./themes/suse/css/chameleon.css      $(DESTDIR)$(HTDOCS_DIR)/themes/suse/css/chameleon.css
+	install -m 644 ./themes/suse/img/suse.svg           $(DESTDIR)$(HTDOCS_DIR)/themes/suse/img/suse.svg
 	
-.PHONY: config cgi_bin js css templates
+.PHONY: config cgi_bin js css templates themes theme_opensuse theme_suse
