@@ -14032,6 +14032,38 @@ pre, .pre {
 }
 
 @media (prefers-color-scheme: dark) {
+
+/* cooverview specific modifications - BEGIN*/
+
+.btn-link {
+  font-weight: 400;
+  color: #2C9E8C;
+  text-decoration: none;
+}
+
+.btn-light {
+  font-weight: 400;
+  color: #2C9E8C;
+  text-decoration: none;
+}
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #2C9E8C;
+}
+.table-hover tbody tr:hover {
+  color: #33b7a2;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #2f363e;
+    opacity: 1;
+}
+
+/* cooverview specific modifications - END*/
+
+
   .alert-success .alert-link {
     color: #73ba25;
   }
