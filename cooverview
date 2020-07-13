@@ -44,15 +44,16 @@ if ($ENV{REQUEST_METHOD} eq 'POST') {
   };
   if ($@) {
     $data = {};
-    logit($content);
-    for my $part (split('\?', $content)) {
-      my ($key, $val) = split('=', $part, 2);
-      $key =~ s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
-      $val =~ s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
-      $data->{$key} = $val;
+    for my $parts (split('\?', $content)) {
+      for my $part (split(/&/, $parts)) {
+        my ($key, $val) = split('=', $part, 2);
+        $key =~ s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
+        $val =~ s/%([0-9A-Fa-f]{2})/chr(hex($1))/eg;
+        $val =~ s/\+/ /g;
+        $data->{$key} = $val;
+      }
     }
 
-    logit($data);
     create_start_page($config, $drc, $data, $template_default_data);
   } else {
     create_details_html($drc, $data->{container}, $data->{pull_command});
@@ -95,9 +96,18 @@ sub create_start_page {
     $error = "An error occured while generating repository list: $@";
   } else {
     my $tmp_repos = [];
+    my $srch = {};
+    foreach my $tmp (split(/ /, $data->{'srch_term'})) {
+      my ($field, $regex) = split(/=/, $tmp, 2);
+      $srch->{$field} = $regex;
+    }
     while (my ($repo, $val) = each %{$h_repos}) {
-      if ($val =~ /$data->{'srch_term'}/) {
+      if ($config->{filter_source_projects}) {
+        next if (defined($srch->{project}) && $val !~ $srch->{project});
+        next if (defined($srch->{container}) && $repo !~ $srch->{container});
         push(@{$tmp_repos}, $repo);
+      } else {
+        push(@{$tmp_repos}, $repo) if ($val =~ /$data->{'srch_term'}/);
       }
     }
     @{$repos} = sort @{$tmp_repos};
@@ -105,10 +115,10 @@ sub create_start_page {
 
 
   my $predefined_search_buttons = [
-    {name => "Official (default)", search_term => "^openSUSE:Containers:"          , css_class => 'success' },
-    {name => "Devel (default)"   , search_term => "^(?!(open)?SUSE|kubic|home):')" , css_class => 'warning' },
-    {name => "Home (default)"    , search_term => "^home"                          , css_class => 'danger'  },
-    {name => "All (default)"     , search_term => ""                               , css_class => 'primary' },
+    {name => "Official (default)", search_term => "project=^openSUSE:Containers: container=.*", css_class => 'success' },
+    {name => "Devel (default)"   , search_term => "project=^(?!(open)?SUSE|kubic|home):')"    , css_class => 'warning' },
+    {name => "Home (default)"    , search_term => "project=^home"                             , css_class => 'danger'  },
+    {name => "All (default)"     , search_term => ""                                          , css_class => 'primary' },
   ];
 
   my $sb = $config->{search_buttons} || $predefined_search_buttons;
