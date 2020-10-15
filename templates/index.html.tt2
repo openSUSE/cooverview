@@ -12,7 +12,7 @@
     <div class=container>
       <div class='form-inline' id="search_patterns">
         [% INCLUDE search_buttons.tt2 %]
-        <form class='mb-2 ml-md-auto' method=POST id="search_form">
+        <form class='mb-2 ml-md-auto' method=GET id="search_form">
 	    <div class="form-group has-search" >
 	      <div class="input-group">
 	      <div class="input-group-prepend">
