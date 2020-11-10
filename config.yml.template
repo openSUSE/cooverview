@@ -39,5 +39,5 @@ search_buttons:
      css_class: danger
   -
      name: All
-     search_term: ""
+     search_term: "project=.*"
      css_class: primary

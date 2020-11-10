@@ -31,7 +31,7 @@ my $predefined_search_buttons = [
   {name => "Official (default)", search_term => "project=^openSUSE:Containers: container=.*", css_class => 'success' },
   {name => "Devel (default)"   , search_term => "project=^(?!(open)?SUSE|kubic|home):')"    , css_class => 'warning' },
   {name => "Home (default)"    , search_term => "project=^home"                             , css_class => 'danger'  },
-  {name => "All (default)"     , search_term => ""                                          , css_class => 'primary' },
+  {name => "All (default)"     , search_term => "project=.*"                                , css_class => 'primary' },
 ];
 
 my $stm_internal = $predefined_search_buttons->[0]->{search_term};
