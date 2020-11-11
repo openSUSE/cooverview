@@ -3,7 +3,7 @@
     <title>[% INCLUDE title.tt2 %]</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="[% theme.css %]">
-    <link rel="stylesheet" href="/cooverview/css/font-awesome.css">
+    <link rel="stylesheet" href="/cooverview/css/fontawesome.css">
   </head>
   <body>
     [% INCLUDE modal.tt2 %]
@@ -48,7 +48,7 @@
     [% INCLUDE footer.tt2 %]
     <script src="/cooverview/js/jquery.min.js"></script>
     <script src="/cooverview/js/bootstrap.bundle.min.js"></script>
-    <script src="/cooverview/js/font-awesome.min.js"></script>
+    <script src="/cooverview/js/fontawesome.min.js"></script>
     <script src="/cooverview/js/cooverview.js"></script>
     <script src="/cooverview/js/js.cookie.js"></script>
   </body>

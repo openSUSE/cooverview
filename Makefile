@@ -3,7 +3,7 @@ WWW_DIR ?= /srv/www
 CGI_DIR ?= $(WWW_DIR)/cgi-bin
 HTDOCS_DIR ?= $(WWW_DIR)/htdocs/cooverview
 
-install: cgi_bin js css templates themes
+install: cgi_bin js css templates themes favicon
 
 cgi_bin:
 	[ -d $(DESTDIR)$(CGI_DIR) ] || mkdir -p $(DESTDIR)$(CGI_DIR)
@@ -13,7 +13,7 @@ js:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/js ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/js
 	install -m 644 ./js/bootstrap.bundle.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap.bundle.min.js
 	install -m 644 ./js/bootstrap.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap.min.js
-	install -m 644 ./js/font-awesome.min.js $(DESTDIR)$(HTDOCS_DIR)/js/font-awesome.min.js
+	install -m 644 ./js/fontawesome.min.js $(DESTDIR)$(HTDOCS_DIR)/js/fontawesome.min.js
 	install -m 644 ./js/jquery.min.js $(DESTDIR)$(HTDOCS_DIR)/js/jquery.min.js
 	install -m 644 ./js/js.cookie.js $(DESTDIR)$(HTDOCS_DIR)/js/js.cookie.js
 	install -m 644 ./js/cooverview.js $(DESTDIR)$(HTDOCS_DIR)/js/cooverview.js
@@ -21,7 +21,7 @@ js:
 css:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/css ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/css
 	install -m 644 ./css/bootstrap.min.css $(DESTDIR)$(HTDOCS_DIR)/css/bootstrap.min.css
-	install -m 644 ./css/font-awesome.css $(DESTDIR)$(HTDOCS_DIR)/css/font-awesome.css
+	install -m 644 ./css/fontawesome.css $(DESTDIR)$(HTDOCS_DIR)/css/fontawesome.css
 
 config:
 	[ -d $(DESTDIR)/etc/cooverview ] || mkdir -p $(DESTDIR)/etc/cooverview
@@ -30,6 +30,9 @@ config:
 	else \
 		install -m 644 ./config.yml.template $(DESTDIR)/etc/cooverview/config.yml;\
 	fi
+
+favicon:
+	install -m 644 ./themes/favicon.ico $(DESTDIR)$(WWW_DIR)/htdocs/
 
 templates:
 	[ -d $(DESTDIR)/etc/cooverview/templates ] || \
