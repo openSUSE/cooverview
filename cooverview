@@ -105,7 +105,7 @@ sub create_start_page {
   } else {
     my $tmp_repos = [];
     my $srch = {};
-    foreach my $tmp (split(/ /, $data->{'srch_term'})) {
+    foreach my $tmp (split(/(\+|\s)/, $data->{'srch_term'})) {
       my ($field, $regex) = split(/=/, $tmp, 2);
       $srch->{$field} = $regex;
     }
