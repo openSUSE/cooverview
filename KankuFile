@@ -44,7 +44,7 @@ jobs:
         - zypper -n --no-gpg-check ref -s
         - zypper -n in make apache2 sudo
         - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
-        - make -C /tmp/kanku install config
+        - make -C /tmp/kanku install config favicon
         - cp /tmp/kanku/contrib/index.html /srv/www/htdocs
         - cp /tmp/kanku/config.yml.opensuse /etc/cooverview/config.yml
         - systemctl enable --now apache2

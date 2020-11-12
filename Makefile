@@ -3,7 +3,7 @@ WWW_DIR ?= /srv/www
 CGI_DIR ?= $(WWW_DIR)/cgi-bin
 HTDOCS_DIR ?= $(WWW_DIR)/htdocs/cooverview
 
-install: cgi_bin js css templates themes favicon
+install: cgi_bin js css templates themes webfonts
 
 cgi_bin:
 	[ -d $(DESTDIR)$(CGI_DIR) ] || mkdir -p $(DESTDIR)$(CGI_DIR)
@@ -21,7 +21,13 @@ js:
 css:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/css ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/css
 	install -m 644 ./css/bootstrap.min.css $(DESTDIR)$(HTDOCS_DIR)/css/bootstrap.min.css
-	install -m 644 ./css/fontawesome.css $(DESTDIR)$(HTDOCS_DIR)/css/fontawesome.css
+	install -m 644 ./css/fontawesome.min.css $(DESTDIR)$(HTDOCS_DIR)/css/fontawesome.min.css
+	install -m 644 ./css/brands.min.css $(DESTDIR)$(HTDOCS_DIR)/css/brands.min.css
+	install -m 644 ./css/solid.min.css $(DESTDIR)$(HTDOCS_DIR)/css/solid.min.css
+
+webfonts:
+	[ -d $(DESTDIR)$(HTDOCS_DIR) ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)
+	cp -av webfonts $(DESTDIR)$(HTDOCS_DIR)/webfonts
 
 config:
 	[ -d $(DESTDIR)/etc/cooverview ] || mkdir -p $(DESTDIR)/etc/cooverview
@@ -60,4 +66,4 @@ theme_suse:
 	install -m 644 ./themes/suse/css/chameleon.css      $(DESTDIR)$(HTDOCS_DIR)/themes/suse/css/chameleon.css
 	install -m 644 ./themes/suse/img/suse.svg           $(DESTDIR)$(HTDOCS_DIR)/themes/suse/img/suse.svg
 	
-.PHONY: config cgi_bin js css templates themes theme_opensuse theme_suse
+.PHONY: config cgi_bin js css templates themes theme_opensuse theme_suse webfonts
