@@ -22,8 +22,8 @@ jobs:
       # https://build.opensuse.org/project/show/devel:kanku:images
       # to find more official Images
       project: devel:kanku:images
-      repository: images_leap_15_1
-      package: openSUSE-Leap-15.1-JeOS
+      repository: images_leap_15_4
+      package: openSUSE-Leap-15.4-JeOS
   -
     use_module: Kanku::Handler::ImageDownload
     options:
@@ -31,7 +31,7 @@ jobs:
   -
     use_module: Kanku::Handler::CreateDomain
     options:
-      memory: 2097152
+      memory: 2G
       vcpu: 2
       use_9p: 1
   -
@@ -40,8 +40,8 @@ jobs:
     use_module: Kanku::Handler::ExecuteCommandViaSSH
     options:
       commands:
-        - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/openSUSE_15.1/OBS:Server:Unstable.repo
-        - zypper -n --no-gpg-check ref -s
+        - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/15.4/OBS:Server:Unstable.repo
+        - zypper -n --gpg-auto-import-keys ref -s
         - zypper -n in make apache2 sudo
         - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
         - make -C /tmp/kanku install config favicon
@@ -61,8 +61,8 @@ jobs:
       # https://build.opensuse.org/project/show/devel:kanku:images
       # to find more official Images
       project: devel:kanku:images
-      repository: images_leap_15_1
-      package: openSUSE-Leap-15.1-JeOS
+      repository: images_leap_15_4
+      package: openSUSE-Leap-15.4-JeOS
   -
     use_module: Kanku::Handler::ImageDownload
     options:
@@ -79,8 +79,8 @@ jobs:
     use_module: Kanku::Handler::ExecuteCommandViaSSH
     options:
       commands:
-        - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/openSUSE_15.1/OBS:Server:Unstable.repo
-        - zypper -n --no-gpg-check ref -s
+        - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/15.4/OBS:Server:Unstable.repo
+        - zypper -n --gpg-auto-import-keys ref -s
         - zypper -n in make apache2 sudo
         - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
         - make -C /tmp/kanku install config
