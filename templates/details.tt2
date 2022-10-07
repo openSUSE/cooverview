@@ -21,7 +21,7 @@
   [% uniquetag_one = name | remove('[^A-Za-z0-9]+') %]
   [% uniquetag_two = tag | remove('[^A-Za-z0-9]+') %]
   [% uniquetag = "$uniquetag_one$uniquetag_two" %]
-  <div href="#" class='btn btn-light rounded-0 card-header d-sm-flex justify-content-between align-items-center' data-toggle="collapse" data-target="#collapse[% uniquetag %]" aria-expanded="false" aria-controls="collapse[% uniquetag %]">
+  <div href="#" class='card-header d-sm-flex justify-content-between align-items-center' data-toggle="collapse" data-target="#collapse[% uniquetag %]" aria-expanded="false" aria-controls="collapse[% uniquetag %]">
     <div class='dropdown-toggle'>
       <h6 class='mb-0 mr-1 d-inline-block'>[% tag %]</h6>
       [% IF use_obs_extended_info %]
@@ -75,7 +75,7 @@
       <tr id="layers-[% img.id %]" class="collapse">
         <td colspan="7" class="p-0">
           <div class='list-group list-group-flush border-bottom border-top'>
-            <div class='bg-light list-group-item'>
+            <div class='list-group-item'>
               <strong>Layers</strong>
             </div>
             <div class=list-group-item>
