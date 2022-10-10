@@ -8,83 +8,43 @@ login_user: root
 login_pass: kankudai
 
 jobs:
+ default:
+  - !include KankuFile.include.d/set-job-context.yml
+  - !include KankuFile.include.d/obscheck.yml
+  - !include KankuFile.include.d/image-download.yml
+  - !include KankuFile.include.d/create-domain.yml
+  -
+    use_module: Kanku::Handler::PrepareSSH
+  - !include KankuFile.include.d/setup-cooverview.yml
+  -
+    use_module: Kanku::Handler::ExecuteCommandViaSSH
+    options:
+      commands:
+        - cp /tmp/kanku/config.yml.template /etc/cooverview/config.yml
  opensuse:
 
-  -
-    use_module: Kanku::Handler::SetJobContext
-    options:
-      host_interface: eth0
-  -
-    use_module: Kanku::Handler::OBSCheck
-    options:
-      api_url: https://api.opensuse.org/public
-      # Please have a look at
-      # https://build.opensuse.org/project/show/devel:kanku:images
-      # to find more official Images
-      project: devel:kanku:images
-      repository: images_leap_15_4
-      package: openSUSE-Leap-15.4-JeOS
-  -
-    use_module: Kanku::Handler::ImageDownload
-    options:
-      use_cache: 1
-  -
-    use_module: Kanku::Handler::CreateDomain
-    options:
-      memory: 2G
-      vcpu: 2
-      use_9p: 1
+  - !include KankuFile.include.d/set-job-context.yml
+  - !include KankuFile.include.d/obscheck.yml
+  - !include KankuFile.include.d/image-download.yml
+  - !include KankuFile.include.d/create-domain.yml
   -
     use_module: Kanku::Handler::PrepareSSH
+  - !include KankuFile.include.d/setup-cooverview.yml
   -
     use_module: Kanku::Handler::ExecuteCommandViaSSH
     options:
       commands:
-        - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/15.4/OBS:Server:Unstable.repo
-        - zypper -n --gpg-auto-import-keys ref -s
-        - zypper -n in make apache2 sudo
-        - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
-        - make -C /tmp/kanku install config favicon
-        - cp /tmp/kanku/contrib/index.html /srv/www/htdocs
         - cp /tmp/kanku/config.yml.opensuse /etc/cooverview/config.yml
-        - systemctl enable --now apache2
- default:
-  -
-    use_module: Kanku::Handler::SetJobContext
-    options:
-      host_interface: eth0
-  -
-    use_module: Kanku::Handler::OBSCheck
-    options:
-      api_url: https://api.opensuse.org/public
-      # Please have a look at
-      # https://build.opensuse.org/project/show/devel:kanku:images
-      # to find more official Images
-      project: devel:kanku:images
-      repository: images_leap_15_4
-      package: openSUSE-Leap-15.4-JeOS
-  -
-    use_module: Kanku::Handler::ImageDownload
-    options:
-      use_cache: 1
-  -
-    use_module: Kanku::Handler::CreateDomain
-    options:
-      memory: 2097152
-      vcpu: 2
-      use_9p: 1
+ suse:
+  - !include KankuFile.include.d/set-job-context.yml
+  - !include KankuFile.include.d/obscheck.yml
+  - !include KankuFile.include.d/image-download.yml
+  - !include KankuFile.include.d/create-domain.yml
   -
     use_module: Kanku::Handler::PrepareSSH
+  - !include KankuFile.include.d/setup-cooverview.yml
   -
     use_module: Kanku::Handler::ExecuteCommandViaSSH
     options:
       commands:
-        - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/15.4/OBS:Server:Unstable.repo
-        - zypper -n --gpg-auto-import-keys ref -s
-        - zypper -n in make apache2 sudo
-        - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
-        - make -C /tmp/kanku install config
-        - cp /tmp/kanku/contrib/index.html /srv/www/htdocs
-        - cp /tmp/kanku/config.yml.template /etc/cooverview/config.yml
-        #- perl -p -i -e 's%test-registry%registry.opensuse.org%' /etc/cooverview/config.yml
-        - systemctl enable --now apache2
+        - cp /tmp/kanku/config.yml.suse-theme /etc/cooverview/config.yml

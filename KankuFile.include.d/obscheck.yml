@@ -1,0 +1,9 @@
+use_module: Kanku::Handler::OBSCheck
+options:
+  api_url: https://api.opensuse.org/public
+  # Please have a look at
+  # https://build.opensuse.org/project/show/devel:kanku:images
+  # to find more official Images
+  project: devel:kanku:images
+  repository: images_leap_15_4
+  package: openSUSE-Leap-15.4-JeOS

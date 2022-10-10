@@ -1,0 +1,3 @@
+use_module: Kanku::Handler::SetJobContext
+options:
+  host_interface: eth0

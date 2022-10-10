@@ -1,0 +1,3 @@
+use_module: Kanku::Handler::ImageDownload
+options:
+  use_cache: 1

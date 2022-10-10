@@ -1,0 +1,12 @@
+use_module: Kanku::Handler::ExecuteCommandViaSSH
+options:
+  commands:
+    - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/15.4/OBS:Server:Unstable.repo
+    - zypper -n --gpg-auto-import-keys ref -s
+    - zypper -n in make apache2 sudo
+    - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
+    - make -C /tmp/kanku install config
+    - cp /tmp/kanku/contrib/index.html /srv/www/htdocs
+    - systemctl enable --now apache2
+    - cp /tmp/kanku/config.yml.template /etc/cooverview/config.yml
+    #- perl -p -i -e 's%test-registry%registry.opensuse.org%' /etc/cooverview/config.yml

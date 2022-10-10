@@ -1,0 +1,5 @@
+use_module: Kanku::Handler::CreateDomain
+options:
+  memory: 2G
+  vcpu: 2
+  use_9p: 1
