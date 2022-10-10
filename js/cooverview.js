@@ -52,6 +52,16 @@ $(document).on('click', '#clipboard', function(){
     return false;
   }
   navigator.clipboard.writeText(text);
+  // Display a tooltip saying you have copied to the clipboard
+  $(this).tooltip({ trigger: 'manual' });
+  $(this).attr('title', 'Copied to the clipboard');
+  $(this).attr('data-original-title', 'Copied to the clipboard');
+  $(this).tooltip('show');
+  setTimeout(() => {
+    $(this).tooltip('hide');
+    $(this).attr('title', 'Copy to clipboard');
+    $(this).attr('data-original-title', 'Copy to clipboard');
+  }, 2000);
   return false;
 });
 $(document).on('click', '#unclickable', function(){
