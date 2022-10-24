@@ -109,13 +109,37 @@ sub create_start_page {
       my ($field, $regex) = split(/=/, $tmp, 2);
       $srch->{$field} = $regex;
     }
-    while (my ($repo, $val) = each %{$h_repos}) {
+    while (my ($repo, $proj) = each %{$h_repos}) {
       if ($config->{filter_source_projects}) {
-        next if (defined($srch->{project}) && $val !~ $srch->{project});
-        next if (defined($srch->{container}) && $repo !~ $srch->{container});
+	my $match_proj;
+	my $match_repo;
+	eval {
+          $match_proj = $proj !~ $srch->{project};
+	};
+	if ($@) {
+	   $error = "Error in project regex: $@";
+	   last;
+	}
+	eval {
+          $match_repo = $repo !~ $srch->{container};
+	};
+	if ($@) {
+	   $error = "Error in container regex: $@";
+	   last;
+	}
+        next if (defined($srch->{project}) && $match_proj);
+        next if (defined($srch->{container}) && $match_repo);
         push(@{$tmp_repos}, $repo);
       } else {
-        push(@{$tmp_repos}, $repo) if ($val =~ /$data->{'srch_term'}/);
+	my $match_proj;
+	eval {
+          $match_proj = $proj =~ /$data->{srch_term}/;
+	};
+	if ($@) {
+	   $error = "Error in project regex: $@";
+	   last;
+	}
+        push(@{$tmp_repos}, $repo) if ($match_proj);
       }
     }
     @{$repos} = sort @{$tmp_repos};
