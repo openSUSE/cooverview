@@ -12,7 +12,7 @@
 		  <fieldset data-role="controlgroup" data-type="vertical" id="pull_command_selector" name="pull_command_selector">
 		    <div class="custom-control custom-radio">
 		      <input type="radio" id="podman" name="pull_command" value="podman" checked="checked" class="custom-control-input">
-		      <label for="podman" class="custom-control-label"> podman - the default in openSUSE Kubic</label>
+		      <label for="podman" class="custom-control-label"> podman - the default in openSUSE MicroOS</label>
 		    </div>
 		    <div class="custom-control custom-radio">
 		      <input type="radio" id="docker" name="pull_command" value="docker" class="custom-control-input">
