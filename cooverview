@@ -104,7 +104,7 @@ sub create_start_page {
     $error = "An error occured while generating repository list: $@";
   } else {
     my $tmp_repos = [];
-    my $srch = {};
+    my $srch = {project=>'', container=>''};
     foreach my $tmp (split(/(\+|\s)/, $data->{'srch_term'})) {
       my ($field, $regex) = split(/=/, $tmp, 2);
       $srch->{$field} = $regex;
