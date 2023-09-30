@@ -12802,6 +12802,10 @@ body {
     color: #adb5bd;
   }
 
+  .jumbotron {
+    background-color: #212529;
+  }
+
   .breadcrumb {
     background-color: #343a40;
   }
