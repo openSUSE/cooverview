@@ -171,14 +171,11 @@ sub create_details_html {
   my $tags = [];
   my $info;
 
-  my $pull_prefix="$pcommand pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
-
   my $data = {
     name => $rep,
     tags => [],
     use_obs_extended_info => $config->{use_obs_extended_info},
   };
-
   eval {
     if ($config->{use_obs_extended_info}) {
       $data->{info} = $drc->obs_info_json($rep);
@@ -187,7 +184,10 @@ sub create_details_html {
         $data->{project_href} = ($config->{build_host}->{proto} || 'https')."://$config->{build_host}->{host}/project/show/$data->{info}->{project}";
       }
       $data->{repository} = $data->{info}->{repository};
+
+      my $pull_prefix;
       while (my ($tag, $tag_val) = each %{$data->{info}->{tags}}) {
+	my $is_helm=0;
 	foreach my $img (@{$tag_val->{images}}) {
 	  $img->{id} = $img->{imageid};
 	  $img->{id} =~ s/.*://;
@@ -195,11 +195,18 @@ sub create_details_html {
 	  $img->{size} = 0;
 	  $img->{size} += $_->{blobsize} for @{$img->{layers}};
 	  $img->{size} = int($img->{size} / (1024 * 1024)) . "MB";
+	  if (($img->{type}||q{}) eq 'helm') { $is_helm = 1}
 	}
 	my $newest = reduce { $a->{buildtime} > $b->{buildtime} ? $a : $b } @{$tag_val->{images}};
 	$tag_val->{buildtime} = $newest->{buildtime};
+        if ($is_helm) {
+          $pull_prefix = "helm pull oci://$config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
+        } else {
+          $pull_prefix = "$pcommand pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
+        }
+
 	my $tag_data = {
-	  pull_command => "$pull_prefix$rep:$tag",
+	  pull_command =>  "$pull_prefix$rep:$tag",
 	  name         => $rep,
 	  tag          => $tag,
 	};
@@ -212,6 +219,7 @@ sub create_details_html {
       die "No tags defined for this image\n" unless $all_tags;
       for my $tag (@{$all_tags}) {
 	my $manifest = $drc->manifests($rep, $tag);
+        my $pull_prefix = "$pcommand pull $config->{pull_host}".(($config->{pull_port}) ? ":$config->{pull_port}/" : "/");
 	my $tag_data = {
 	  pull_command => "$pull_prefix$rep:$tag",
 	  manifest     => $manifest,
@@ -223,7 +231,7 @@ sub create_details_html {
     }
     if ($#{$data->{tags}} > 0) {
       my $latest_index = first { @{$data->{tags}}[$_]->{tag} eq 'latest' } 0..$#{$data->{tags}};
-      my $latest = splice(@{$data->{tags}}, $latest_index, 1);
+      my $latest = splice(@{$data->{tags}}, ($latest_index||0), 1);
       unshift(@{$data->{tags}}, $latest);
     }
   };

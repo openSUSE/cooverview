@@ -48,3 +48,10 @@ jobs:
     options:
       commands:
         - cp /tmp/kanku/config.yml.suse-theme /etc/cooverview/config.yml
+        - zypper ar obs://SUSE:CA/16.0 SUSE-CA
+        - zypper --gpg-auto-import-keys ref -s
+        - zypper -n in ca-certificates-suse
+        - perl -p -i -e 's#opensuse.org#suse.de#' /etc/cooverview/config.yml
+        - perl -p -i -e 's#openSUSE:Containers:#SUSE:Containers:#' /etc/cooverview/config.yml
+ 
+

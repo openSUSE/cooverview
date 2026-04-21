@@ -11,11 +11,10 @@ cgi_bin:
 
 js:
 	[ -d $(DESTDIR)$(HTDOCS_DIR)/js ] || mkdir -p $(DESTDIR)$(HTDOCS_DIR)/js
-	install -m 644 ./js/bootstrap.bundle.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap.bundle.min.js
-	install -m 644 ./js/bootstrap.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap.min.js
+	install -m 644 ./js/jquery-4.0.0.min.js $(DESTDIR)$(HTDOCS_DIR)/js/jquery-4.0.0.min.js
+	install -m 644 ./js/bootstrap-5.1.3.bundle.min.js $(DESTDIR)$(HTDOCS_DIR)/js/bootstrap-5.1.3.bundle.min.js
 	install -m 644 ./js/fontawesome.min.js $(DESTDIR)$(HTDOCS_DIR)/js/fontawesome.min.js
-	install -m 644 ./js/jquery.min.js $(DESTDIR)$(HTDOCS_DIR)/js/jquery.min.js
-	install -m 644 ./js/js.cookie.js $(DESTDIR)$(HTDOCS_DIR)/js/js.cookie.js
+	install -m 644 ./js/js.cookie-3.0.5.min.js $(DESTDIR)$(HTDOCS_DIR)/js/js.cookie-3.0.5.min.js
 	install -m 644 ./js/cooverview.js $(DESTDIR)$(HTDOCS_DIR)/js/cooverview.js
 
 css:

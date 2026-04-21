@@ -5,5 +5,5 @@ options:
   # https://build.opensuse.org/project/show/devel:kanku:images
   # to find more official Images
   project: devel:kanku:images
-  repository: images_leap_15_4
-  package: openSUSE-Leap-15.4-JeOS
+  repository: images_leap_16_0
+  package: openSUSE-Leap-16.0-JeOS

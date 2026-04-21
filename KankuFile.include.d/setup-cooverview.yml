@@ -1,7 +1,7 @@
 use_module: Kanku::Handler::ExecuteCommandViaSSH
 options:
   commands:
-    - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/15.4/OBS:Server:Unstable.repo
+    - zypper ar https://download.opensuse.org/repositories/OBS:/Server:/Unstable/\$releasever/ O:S:U
     - zypper -n --gpg-auto-import-keys ref -s
     - zypper -n in make apache2 sudo
     - zypper -n in perl-Net-Docker-Registry perl-YAML perl-JSON-XS perl-Template-Toolkit perl-LWP-Protocol-https perl-Net-Server
