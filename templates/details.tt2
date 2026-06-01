@@ -21,7 +21,7 @@
   [% uniquetag_one = name | remove('[^A-Za-z0-9]+') %]
   [% uniquetag_two = tag | remove('[^A-Za-z0-9]+') %]
   [% uniquetag = "$uniquetag_one$uniquetag_two" %]
-  <div href="#" class='card-header d-sm-flex justify-content-between align-items-center' data-toggle="collapse" data-target="#collapse[% uniquetag %]" aria-expanded="false" aria-controls="collapse[% uniquetag %]">
+  <div href="#" class='card-header d-sm-flex justify-content-between align-items-center' data-bs-toggle="collapse" data-bs-target="#collapse[% uniquetag %]" aria-expanded="false" aria-controls="collapse[% uniquetag %]">
     <div class='dropdown-toggle'>
       <h6 class='mb-0 mr-1 d-inline-block'>[% tag %]</h6>
       [% IF use_obs_extended_info %]
@@ -57,7 +57,7 @@
     <tbody>
       [% FOREACH img IN info.tags.$tag.images %]
       <tr>
-        <td><a class='dropdown-toggle' data-toggle="collapse" href="#layers-[% img.id %]" role="button" aria-expanded="false" aria-controls="layers-[% img.id %]">[% img.id %]</a></td>
+        <td><a class='dropdown-toggle' data-bs-toggle="collapse" href="#layers-[% img.id %]" role="button" aria-expanded="false" aria-controls="layers-[% img.id %]">[% img.id %]</a></td>
         <td>[% img.arch %]</td>
         <td>
         [% IF img.buildtime %]
