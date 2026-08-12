@@ -1,3 +1,29 @@
 [% FOR btn IN search_buttons %]
-  <button class="btn btn-[% btn.css_class %] mr-2 mb-2" onclick="update_search('[% btn.search_term %]')">[% btn.name %]</button>
+  [% IF btn.dropdown %]
+    <div class="btn-group mr-2 mb-2 me-2">
+      <!-- Main button area -->
+      <button type="button" class="btn btn-[% btn.css_class %]" onclick="update_search('[% btn.search_term %]')">
+        [% btn.name %]
+      </button>
+      <!-- Split toggle area -->
+      <button type="button" class="btn btn-[% btn.css_class %] dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      </button>
+      <!-- Dropdown menu shell -->
+      <ul class="dropdown-menu p-0 border-0 shadow">
+        [% FOR sub IN btn.dropdown.sort('name') %]
+          <li>
+            <!-- Added 'w-100' (full width) and 'text-left instead of dropdown object to inherit css customizations' -->
+            <a class="btn btn-[% btn.css_class %] w-100 text-left text-start rounded-0" style="border: none;" href="#" onclick="update_search('[% sub.search_term %]'); return false;">
+              [% sub.name %]
+            </a>
+          </li>
+        [% END %]
+      </ul>
+    </div>
+  [% ELSE %]
+    <!-- Standard button -->
+    <button class="btn btn-[% btn.css_class %] mr-2 mb-2 me-2" onclick="update_search('[% btn.search_term %]')">
+      [% btn.name %]
+    </button>
+  [% END %]
 [% END %]
