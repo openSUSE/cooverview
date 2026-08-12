@@ -27,11 +27,11 @@ filter_source_projects: 1
 search_buttons:
   -
      name:        Official
-     search_term: "project=^openSUSE:Containers container=.*"
+     search_term: "project=^(openSUSE:Containers|systemsmanagement:Uyuni:Stable) container=.*"
      css_class: success
   -
      name: Devel
-     search_term: "project=^(?!(open)?SUSE:|kubic:|home:).*"
+     search_term: "project=^(?!(open)?SUSE:|kubic:|home:|systemsmanagement:Uyuni:Stable).*"
      css_class: warning
   -
      name: Home
