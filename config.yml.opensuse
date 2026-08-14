@@ -21,23 +21,56 @@ theme:
 
 ################################################################################
 # Filtering projects
+# Is it possible to create dropdown menus. The entries added in a dropdown are automatically sorted
 ################################################################################
 # default_search_term: ".*"
 filter_source_projects: 1
 search_buttons:
   -
-     name:        Official
+     name:         All official
      search_term: "project=^openSUSE:Containers: container=.*"
      css_class: success
+     dropdown:
+       - name:         Leap
+         search_term: "project=^openSUSE:Containers:Leap container=.*"
+       - name:         Tumbleweed
+         search_term: "project=^openSUSE:Containers:Tumbleweed container=.*"
+       - name:         openQA
+         search_term: "project=^openSUSE:Containers:Tumbleweed container=.*openqa*"
+       - name:         Uyuni Health Check Stable
+         search_term: "project=^systemsmanagement:Uyuni:healthcheck:Stable container=.*"
+       - name:         Uyuni Stable
+         search_term: "project=^systemsmanagement:Uyuni:Stable container=.*"
+       - name:         Uyuni Patches Stable
+         search_term: "project=^systemsmanagement:Uyuni:Stable:Patches container=.*"
+       - name:         BCI
+         search_term: "project=^openSUSE:Containers: container=.*bci.*"
+       - name:         Kubevirt
+         search_term: "project=^openSUSE:Containers: container=.*kubevirt*"
+       - name:         Kubic
+         search_term: "project=^openSUSE:Containers: container=.*kubic*"
   -
-     name: Devel
-     search_term: "project=^(?!(open)?SUSE:|kubic:|home:).*"
+     name:         Devel
+     search_term: "project=^(?!(open)?SUSE:|kubic:|home:|systemsmanagement:Uyuni:Stable).*"
      css_class: warning
+     dropdown:
+       - name:         BCI devel
+         search_term: "project=^devel:BCI: container=.*"
+       - name:         openQA devel
+         search_term: "project=^devel:openQA: container=.*"
+       - name:         Uyuni Health Check
+         search_term: "project=^systemsmanagement:Uyuni:healthcheck(?!:) container=.*"
+       - name:         Uyuni
+         search_term: "project=^systemsmanagement:Uyuni:Master(?!:) container=.*"
+       - name:         Uyuni CI
+         search_term: "project=^systemsmanagement:Uyuni:Master:Docker container=.*"
+       - name:         Uyuni Patches
+         search_term: "project=^systemsmanagement:Uyuni:Master:Patches container=.*"
   -
-     name: Home
+     name:         Home
      search_term: "project=^home:"
      css_class: danger
   -
-     name: All
+     name:         All
      search_term: "project=.*"
      css_class: primary
